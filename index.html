@@ -1,2407 +1,455 @@
 <!DOCTYPE html>
 <html>
+    
+    <head>
+        <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>卡密验证系统</title>
+                    <style>
+                        /* * {
+                         margin: 0;
+                         padding: 0;
+                         font-family: 'Microsoft YaHei', Arial, sans-serif;
+                         } */
+                        
+                        .baiyunyz {
+                            position: fixed;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            border-radius: 15px;
+                            padding: 20px;
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                            max-width: 80%;
+                            width: 350px;
+                            text-align: center;
+                            background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+                            border: 2px solid yellow;  /* 2px宽，实线，黄色边框 */
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Funimate</title>
-	<!-- 引入样式文件 -->
-	<link rel="stylesheet" href="https://unpkg.com/vant@2.12/lib/index.css" />
-	<!-- 引入 Vue 和 Vant 的 JS 文件 -->
-	<script src="https://unpkg.com/vue@2.6/dist/vue.min.js"></script>
-	<script src="https://unpkg.com/vant@2.12/lib/vant.min.js"></script>
-	<script src="https://qiuxuewl.site/js/vant/jquery.min.js"></script> <!-- BS添加命令 --> 
-	<style>
-		* {
-			padding: 0;
-			margin: 0;
-		}
+                            
+                            
+                            
+                        }
+                        
+                        .baiyunyz h1 {
+                            font-size: 24px;
+                            color: #333;
+                            margin-bottom: 10px;
+                        }
+                        
+                        .baiyunyz h2 {
+                            color: #666;
+                            margin-bottom: 20px;
+                            font-size: 16px;
+                        }
+                        
+                        .baiyunyz input {
+                            border: 1px solid #ccc;
+                            background-color: #f9f9f9;
+                            width: 90%;
+                            border-radius: 5px;
+                            padding: 10px 15px;
+                            margin-bottom: 10px;
+                            font-size: 16px;
+                            color: #333;
+                        }
+                        
+                        .baiyunyz button {
+                            /*登录按钮背景颜色*/
+                            background-color: rgba(255, 255, 255, 0.5); /* 白色半透明背景 */
+                            border: 0;
+                            padding: 12px 18px;
+                            border-radius: 8px;
+                            width: 50%;
+                            cursor: pointer;
+                            font-size: 18px;
+                            font-weight: 700;
+                            transition: background-color 0.3s ease;
+                            color: yellow; /* 文字颜色改为黄色 */
+                            padding-top: 8px;
 
-        /*菜单*/
-        
-        *:not(input, checkbox, textarea) {
-            /*禁止文本选择*/
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
-            /* Non-prefixed version, currently */
-        }
-        
-   .aymenu {
-      position: fixed;
-      width: 240px;
-      height: 370px;
-      top: calc(40% - 180px);
-      left: calc(40% - 180px);
-      z-index: 456;
-      border-radius: 8px;
-      overflow: hidden;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      font-weight: bold;
-      background: rgba(0, 0, 0, .40);
-    }
-        
-        .van-tab {
-            font-size: 15px;
-        }
-        
-  
-        
-        .van-nav-bar__title {
-            max-width: 60%;
-            margin: 0 auto;
-            color: #323233;
-            font-weight: 500;
-            font-size: 16px;
-            font-weight: 800;
-        }
-        
-        .fun-block__title {
-            margin: 0;
-            padding: 32px 32px 5px;
-            color: rgba(69, 90, 100, 0.6);
-            font-weight: normal;
-            font-size: 14px;
-            line-height: 16px;
-        }
-        
-        .van-cell {
-            line-height: unset;
-        }
-        
-        .menuBody {
-            overflow-y: auto;
-            padding-bottom: 46px;
-        }
-        
-        .custom-button {
-            width: 26px;
-            color: #fff;
-            font-size: 10px;
-            line-height: 18px;
-            text-align: center;
-            border-radius: 100px;
-            background-color: #1989fa;
-        }
-        
-        .van-stepper--round .van-stepper__minus {
-            color: #fff;
-            background-color: #1989fa;
-            border: 1px solid #1989fa;
-        }
-        
-        .van-stepper--round .van-stepper__plus {
-            color: #fff;
-            background-color: #1989fa;
-        }
-        
-      
-        .van-hairline--top-bottom::after,
-        .van-hairline-unset--top-bottom::after {
-            border-width: 0px 0;
-        }
-        
-        .van-tabs__nav--card {
-            /*滑块*/
-            box-sizing: border-box;
-            height: 30px;
-            margin: 0 0px;
-            border: 0px solid #e9e9eb;
-        }
-        
-        .van-tabs__nav--card2 {
-            /*滑块*/
-            box-sizing: border-box;
-            height: 30px;
-            margin: 0 16px;
-            border: 0px solid #e9e9eb;
-        }
-        
-        .van-tabs__nav--card .van-tab.van-tab--active,
-        .van-tabs__nav--card2 .van-tab.van-tab--active {
-            border-radius: 6px;
-            color: #323233;
-            background-color: #ffffff;
-            font-weight: 600;
-        }
-        
-        .van-tabs__nav--card .van-tab,
-        .van-tabs__nav--card2 .van-tab {
-            color: #969799;
-            border-right: 0px solid #969799;
-            font-weight: 450;
-
-        }
-        
-        .van-tabs__nav--card .van-tab.van-tab--active,
-        .van-tabs__nav--card2 .van-tab.van-tab--active {
-            border-radius: 6px;
-            color: #FFFFFF;
-            background: rgba(0, 0, 0, .55);
-
-        }
-        
-        .van-tabs__nav--card .van-tab,
-        .van-tabs__nav--card2 .van-tab {
-            color: #969799;
-            border-right: 0px solid #969799;
-        }
-        
-        .van-tabs__nav {
-            position: relative;
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: flex;
-            background-color: #e9e9eb;
-            -webkit-user-select: none;
-            user-select: none;
-            border-radius: 7px;
-background: rgba(0, 0, 0, .10);
-        }
-        
-   
-        
-        .van-switch {
-            position: relative;
-            display: inline-block;
-            box-sizing: content-box;
-            width: 50px;
-            height: 30px;
-            font-size: 30px;
-            background-color: #fff;
-            border: 1px solid #fff;
-            border-radius: 1em;
-            cursor: pointer;
-            -webkit-transition: background-color .3s;
-            transition: background-color .3s;
-        }
-        
-        .van-switch__node {
-            position: absolute;
-            font-size: 20px;
-            top: 2px;
-            left: 2px;
-            width: 26px;
-            height: 26px;
-            font-size: inherit;
-            background-color: #fff;
-            box-shadow: 0 3px 1px 0 rgb(0 0 0 / 2%), 0 2px 2px 0 rgb(0 0 0 / 5%), 0 3px 3px 0 rgb(0 0 0 / 5%);
-            -webkit-transition: -webkit-transform .3s cubic-bezier(.3, 1.05, .4, 1.05);
-            transition: -webkit-transform .3s cubic-bezier(.3, 1.05, .4, 1.05);
-            transition: transform .3s cubic-bezier(.3, 1.05, .4, 1.05);
-            transition: transform .3s cubic-bezier(.3, 1.05, .4, 1.05), -webkit-transform .3s cubic-bezier(.3, 1.05, .4, 1.05);
-        }
-        
-        .van-stepper__minus,
-        .van-stepper__plus {
-            position: relative;
-            box-sizing: border-box;
-            width: 28px;
-            height: 28px;
-            margin: 0;
-            padding: 0;
-            color: #323233;
-            vertical-align: middle;
-            background-color: #e9e9eb;
-            border: 0;
-            cursor: pointer;
-        }
-        
-        .van-stepper__input {
-            box-sizing: border-box;
-            width: 32px;
-            height: 28px;
-            margin: 0 0px;
-            padding: 0;
-            color: #323233;
-            font-size: 14px;
-            line-height: normal;
-            text-align: center;
-            vertical-align: middle;
-            background-color: #e9e9eb;
-            border: 0;
-            border-width: 1px 0;
-            border-radius: 0;
-        }
-        
-        .van-stepper__minus::before,
-        .van-stepper__plus::before {
-            width: 50%;
-            height: 2px;
-        }
-        
-        .van-stepper__minus::after,
-        .van-stepper__plus::after {
-            width: 2px;
-            height: 50%;
-        }
-        
-        .van-slider__button {
-            width: 24px;
-            height: 24px;
-            background-color: #fff;
-            border-radius: 50%;
-            box-shadow: 0 2px 5px rgb(0 0 0 / 20%);
-        }
-        
-        .van-nav-bar {
-            position: relative;
-            z-index: 1;
-            line-height: 22px;
-            text-align: center;
-            color: #FFFFFF;
-            -webkit-user-select: none;
-            user-select: none;
-background: rgba(0, 0, 0, .40);
-        }
-        
-        .van-cell::after {
-            position: absolute;
-            box-sizing: border-box;
-            content: ' ';
-            pointer-events: none;
-            right: 0px;
-            bottom: 0;
-            left: 16px;
-            border-bottom: 0.8px solid #cacaca;
-            -webkit-transform: scaleY(.5);
-            transform: scaleY(.5);
-        }
-        
-        .van-collapse-item--border::after {
-            position: absolute;
-            box-sizing: border-box;
-            content: ' ';
-            pointer-events: none;
-            top: 0;
-            right: 0px;
-            left: 16px;
-            border-top: 0.8px solid #cacaca;
-            -webkit-transform: scaleY(.5);
-            transform: scaleY(.5);
-        }
-        
-        .van-radio__icon--checked .van-icon {
-            color: #c1c1c1;
-            background-color: #ffffff00;
-            border-color: #c1c1c1;
-        }
-        
-        .van-stepper__minus {
-            border-radius: 5px 0 0 5px;
-        }
-        
-        .van-stepper__plus {
-            border-radius: 0 5px 5px 0;
-        }
-        
-        .van-hairline--bottom::after {
-            border-bottom-width: 0px;
-        }
-        
-        .van-collapse-item__title .van-cell__right-icon::before {
-            -webkit-transform: rotate(0deg) translateZ(0);
-            transform: rotate(0deg) translateZ(0);
-            -webkit-transition: -webkit-transform .3s;
-            transition: -webkit-transform .3s;
-            transition: transform .3s;
-            transition: transform .3s, -webkit-transform .3s;
-        }
-        
-        .van-collapse-item__title--expanded .van-cell__right-icon::before {
-            -webkit-transform: rotate(90deg);
-            transform: rotate(90deg);
-        }
-	</style>
-</head>
-
-<body>
-	<div id="app">
-		<div class="aymenu" ref="menuMain">
-
-			<div @touchstart="titleTouchStart" @touchmove="titleTouchMove">
-				<van-nav-bar title="Funimate">
-					<template #right>
-						<van-icon @click="closeMenu" name="close" size="24" color="#e6f608" /><!-- 关闭用的X的颜色 -->
-					</template>
-				</van-nav-bar>
-			</div>
-			<div class="menuBody" ref="menuBody">
-				<div v-if="!bsok"><!-- BS添加命令 -->
-					<div class="title" style="color: #e90707;">公告</div><!-- BS添加命令 -->
-					<div class="title" style="color: #a06206;">开启自己需要功能</div><!-- BS添加命令 -->
-					<div class="title" style="color: #14f608;">  </div><!-- BS添加命令 -->
-					<div class="title" style="color: #147287;">大吉大利,今晚吃鸡！</div><!-- BS添加命令 -->
-					<div class="title" style="color: #0858d8;">   </div><!-- BS添加命令 -->
-					<van-cell-group inset><!-- BS添加命令 -->
-						<van-field v-model="BSCard" center label="输入卡密" placeholder="请输入卡密"><!-- BS添加命令 -->
-							<template #button><!-- BS添加命令 -->
-								<van-button size="small" type="default" @click="BSLogin">登录</van-button><!-- BS添加命令 -->
-							</template><!-- BS添加命令 -->
-						</van-field><!-- BS添加命令 -->
-					</van-cell-group><!-- BS添加命令 -->
-				</div><!-- BS添加命令 -->
-				<div v-if="bsok"><!-- BS添加命令 -->
-					<van-cell-group inset>
-						<van-cell center title="绘制开关">
-							<template #right-icon>
-								<van-tabs v-model="checkboxList.isDraw" type="card" style="width: 60%;">
-									<van-tab title="开启" name="1"></van-tab>
-									<van-tab title="关闭" name="2"></van-tab>
-								</van-tabs>
-							</template>
-						</van-cell>
-						<van-cell center title="主播模式">
-							<template #right-icon>
-								<van-tabs v-model="isLive" @change="changeLive" type="card" style="width: 60%;">
-									<van-tab title="开启" name="1"></van-tab>
-									<van-tab title="关闭" name="2"></van-tab>
-								</van-tabs>
-							</template>
-						</van-cell>
-					
-					</van-cell-group>
-
-					<br>
-					<van-cell-group inset>
-						<van-collapse v-model="active" accordion>
-							<van-collapse-item title="人物绘制">
-								<van-cell center title="射线">
-									<template #right-icon>
-										<van-switch v-model="checkboxList.isLine" size="20" active-color="#34c85a"
-											inactive-color="#e9e9eb" />
-									</template>
-								</van-cell>
-								<van-cell center title="方框">
-									<template #right-icon>
-										<van-switch v-model="checkboxList.isBox" size="20" active-color="#34c85a"
-											inactive-color="#e9e9eb" />
-									</template>
-								</van-cell>
-								<van-cell center title="血量">
-									<template #right-icon>
-										<van-switch v-model="checkboxList.isHP" size="20" active-color="#34c85a"
-											inactive-color="#e9e9eb" />
-									</template>
-								</van-cell>
-								<van-cell center title="信息">
-									<template #right-icon>
-										<van-switch v-model="checkboxList.isInfo" size="20" active-color="#34c85a"
-											inactive-color="#e9e9eb" />
-									</template>
-								</van-cell>
-								<van-cell center title="距离">
-									<template #right-icon>
-										<van-switch v-model="checkboxList.isDis" size="20" active-color="#34c85a"
-											inactive-color="#e9e9eb" />
-									</template>
-								</van-cell>
-								<van-cell center title="手持">
-									<template #right-icon>
-										<van-switch v-model="checkboxList.isShouChi" size="20" active-color="#34c85a"
-											inactive-color="#e9e9eb" />
-									</template>
-								</van-cell>
-								<van-cell center title="背敌">
-									<template #right-icon>
-										<van-switch v-model="checkboxList.isBeid" size="20" active-color="#34c85a"
-											inactive-color="#e9e9eb" />
-									</template>
-								</van-cell>
-								<van-cell center title="雷达">
-									<template #right-icon>
-										<van-switch v-model="checkboxList.isleida" size="20" active-color="#34c85a"
-											inactive-color="#e9e9eb" />
-									</template>
-								</van-cell>
-							</van-collapse-item>
-						</van-collapse>
-					</van-cell-group>
-
-					<br>
-					<van-cell-group inset>
-					
-						<van-cell center title="绘制风格">
-							<template #right-icon>
-								<van-tabs v-model="huizhi" type="card" style="width: 60%;">
-									<van-tab title="经典" name="1"></van-tab>
-									<van-tab title="简洁" name="2"></van-tab>
-								</van-tabs>
-							</template>
-						</van-cell>
-						<van-cell center title="方框风格">
-							<template #right-icon>
-								<van-tabs v-model="fangkuang" type="card" style="width: 60%;">
-									<van-tab title="普通2D" name="1"></van-tab>
-									<van-tab title="动态3D" name="2"></van-tab>
-								</van-tabs>
-							</template>
-						</van-cell>
-						<van-cell center title="绘制帧率">
-							<template #right-icon>
-								<van-tabs v-model="fps" @change="fuckfps" type="card" style="width: 60%;">
-									<van-tab title="60帧" name="30"></van-tab>
-									<van-tab title="90帧" name="21"></van-tab>
-									<van-tab title="120帧" name="16"></van-tab>
-								</van-tabs>
-							</template>
-						</van-cell>
-						<van-collapse v-model="active2" accordion>
-							<van-collapse-item title="雷达参数">
-								<van-cell center title="雷达横向移动">
-									<template #right-icon>
-										<van-slider v-model="leidaX" :min="0" :max="500" bar-height="3px"
-											style="width: 35%;">
-										</van-slider>&nbsp;&nbsp;&nbsp;&nbsp;
-										<van-stepper v-model="leidaX" :min="0" :max="500" button-size="26" disable-input
-											integer />
-									</template>
-								</van-cell>
-								<van-cell center title="雷达垂直移动">
-									<template #right-icon>
-										<van-slider v-model="leidaY" :min="0" :max="200" bar-height="3px"
-											style="width: 35%;">
-										</van-slider>&nbsp;&nbsp;&nbsp;&nbsp;
-										<van-stepper v-model="leidaY" :min="0" :max="200" button-size="26" disable-input
-											integer />
-									</template>
-								</van-cell>
-								<van-cell center title="雷达大小">
-									<template #right-icon>
-										<van-tabs v-model="leida" type="card" style="width: 60%;">
-											<van-tab title="大" name="1"></van-tab>
-											<van-tab title="中" name="2"></van-tab>
-											<van-tab title="小" name="3"></van-tab>
-										</van-tabs>
-									</template>
-								</van-cell>
-							</van-collapse-item>
-							<van-collapse-item title="绘图参数">
-								<van-cell center title="绘制范围">
-									<template #right-icon>
-										<van-slider v-model="dis" :min="0" :max="500" bar-height="3px"
-											style="width: 63%;">
-											<template #button>
-												<div class="custom-button">{{dis}}</div>
-											</template>
-										</van-slider>
-									</template>
-								</van-cell>
-								<van-cell center title="观透队标">
-									<template #right-icon>
-										<van-slider v-model="team" :min="0" :max="100" bar-height="3px"
-											style="width: 63%;">
-											<template #button>
-												<div class="custom-button">{{team}}</div>
-											</template>
-										</van-slider>
-									</template>
-								</van-cell>
-								<van-cell center title="顶部调整">
-									<template #right-icon>
-										<van-slider v-model="renshu" :min="0" :max="100" bar-height="3px"
-											style="width: 63%;">
-											<template #button>
-												<div class="custom-button">{{renshu}}</div>
-											</template>
-										</van-slider>
-									</template>
-								</van-cell>
-								<van-cell center title="线条粗细">
-									<template #right-icon>
-										<van-stepper v-model="xian" min="1" max="10" theme="round" button-size="22"
-											disable-input />
-									</template>
-								</van-cell>
-							</van-collapse-item>
-						</van-collapse>
-					</van-cell-group>
-				</div>
-			</div>
-		</div><!-- BS添加命令 -->
-	</div>
-</body>
-<script>
-	let app = new Vue({
-		el: '#app',
-		data() {
-			return {
-				BSCard: "",
-				bsok: false,
-				active: false,
-				active1: false,
-				active2: false,
-				active3: false,
-				active4: false,
-
-				checkboxList: {
-					isDraw: '2', //开关
-					isLine: true, //射线
-					isBox: true, //方框
-					isBone:false, //骨骼
-					isHP: true, //血量
-					isInfo: true, //信息
-					isDis: true, //距离
-					isShouChi: false, //手持
-					isBeid: true, //背敌
-					isleida: false, //雷达
-					isvehicle: true, //载具
-					ishezi: false, //盒子
-				},
-				naijiu: false, //耐久  
-				youhao: false, //油耗
-				wuhou: false, //无后
-				judian: false, //聚点
-				jingfang: false, //镜防
-				zimiao: false, //辅助瞄准
-				zimiaodx: 100, //圈大小
-				zimiaojl: 50, //圈距离
-
-				leidaX: 250, //雷达x
-				leidaY: 50, //雷达y
-				renshu: 40, //人数
-				xian: 2, //线条
-				isLive: '2', //直播开关
-				leida: '1', //雷达大小
-				tietu: '2', //贴图开关
-				huizhi: '2', //绘制风格
-				guge: 'bg', //骨骼风格
-				fangkuang: '1', //方框风格
-				fps: '21', //绘制帧率
-				dis: '500', //绘制范围
-				zaijufw: '500', //载具范围
-				gugefw: '50', //骨骼范围
-				team: '0', //观战队标
-
-				teamcolor: { //队标颜色
-					1: '#DC143C',
-					2: '#FFB6C1',
-					3: '#FF69B4',
-					4: '#FF00FF',
-					5: '#7B68EE',
-					6: '#F58220',
-					7: '#6495ED',
-					8: '#1E90FF',
-					9: '#426ab3',
-					10: '#00FFFF',
-					11: '#7FFFD4',
-					12: '#90EE90',
-					13: '#FFFF00',
-					14: '#F0E68C',
-					15: '#FFA500',
-					16: '#FF8C00',
-					17: '#8B4513',
-					18: '#FF6347',
-					19: '#CD5C5C',
-					20: '#C0C0C0',
-					21: '#696969',
-					22: '#66CDAA',
-					23: '#FFD700',
-					24: '#FFE4E1',
-					25: '#8B008B',
-					26: '#5C2223',
-					27: '#482936',
-					28: '#C45A65',
-					29: '#440E25',
-					30: '#36292F',
-					31: '#5D3F51',
-					32: '#681752',
-					33: '#3E3841',
-					34: '#ED556A',
-					35: '#7A7374',
-					36: '#EA517F',
-					37: '#3161AB',
-					38: '#2474B5',
-					39: '#93B5CF',
-					40: '#2177B8',
-					41: '#2D2E36',
-					42: '#5E6E6D',
-					43: '#61649F',
-					44: '#475164',
-					45: '#2B333E',
-					46: '#15559A',
-					47: '#5E7987',
-					48: '#74787A',
-					49: '#1781B5',
-					50: '#BBB5AC',
-					51: '#FF9900',
-					52: '#AD9E5F',
-					53: '#DC9123',
-					54: '#97846C',
-					55: '#E3BD8D',
-					56: '#4D4030',
-					57: '#F8C387',
-					58: '#FA7E23',
-					59: '#E2D849',
-					60: '#5E5314',
-					61: '#AD9E5F',
-					62: '#FED71A',
-					63: '#E4BF11',
-					64: '#D2B42C',
-					65: '#F8DF72',
-					66: '#DDC871',
-					67: '#93D5DC',
-					68: '#57C3C2',
-					69: '#1BA784',
-					70: '#428675',
-					71: '#69A794',
-					72: '#FF7F50',
-					73: '#E9967A',
-					74: '#B8860B',
-					75: '#DAA520',
-					76: '#F0E68C',
-					77: '#9ACD32',
-					78: '#00FA9A',
-					79: '#66CDAA',
-					80: '#2F4F4F',
-					81: '#5F9EA0',
-					82: '#5F9EA0',
-					83: '#6495ED',
-					84: '#87CEFA',
-					85: '#F5DEB3',
-					86: '#FFFACD',
-					87: '#D2691E',
-					88: '#CD853F',
-					89: '#DEB887',
-					90: '#BC8F8F',
-					91: '#FFDEAD',
-					92: '#FFE4E1',
-					93: '#FFEFD5',
-					94: '#F5FFFA',
-					95: '#E6E6FA',
-					96: '#F0FFF0',
-					97: '#DCDCDC',
-					98: '#D8BFD8',
-					99: '#B22222',
-					100: '#808080',
-				},
-
-				zaiju: { //载具
-					0: '自行车',
-					3348: '旅行车',
-					3309: '三轮',
-					3301: '蹦蹦',
-					3305: '吉普',
-					3302: '吉普',
-					3304: '吉普',
-					3306: '轿车',
-					3336: '双跑',
-					3312: '轿车',
-					3314: '皮卡',
-					3310: '皮卡',
-					3308: '摩托',
-					3315: '小绵羊',
-					3335: '大脚车',
-					3325: '快艇',
-					3326: '摩托艇',
-					3307: '面包车',
-					3342: '越野摩托',
-					3329: '装甲车',
-					3334: '滑翔机',
-					3345: '波波球',
-				},
-
-				shouchi: { //手持
-					0: '拳头',
-					101001: 'AKM',
-					101002: 'M16A4',
-					101003: 'SCAR-L',
-					101004: 'M416',
-					101005: 'GROZA',
-					101006: 'AUG',
-					101007: 'QBZ',
-					101008: 'M762',
-					101009: 'Mk47',
-					101010: 'G36C',
-					101011: 'AC-VAL',
-					101012: '蜜獾',
-					102001: 'UZI',
-					102003: 'Vector',
-					102004: '汤姆逊',
-					102005: '野牛',
-					102007: 'MP5K',
-					102105: 'P90',
-					103013: 'M417',
-					103004: 'SKS',
-					103006: 'Mini14',
-					103009: 'SLR',
-					103005: 'VSS',
-					103010: 'QBU',
-					103007: 'Mk14',
-					103003: 'AWM',
-					103903: 'AWM',
-					103002: 'M24',
-					103011: '莫辛纳甘',
-					103901: 'Kar98K',
-					103001: 'Kar98K',
-					103008: 'Win94',
-					103012: 'AMR',
-					102002: 'UMP45',
-					104002: 'S1897',
-					104001: 'S686',
-					104100: 'SPAS-12',
-					104004: 'DBS',
-					104003: 'S12K',
-					105002: 'DP-28',
-					107001: '十字弩',
-					107006: '战术弩',
-					105010: 'MG3',
-					105001: 'M249',
-					107007: '爆炸猎弓',
-					108004: '平底锅',
-					108003: '镰刀',
-					108002: '撬棍',
-					108001: '大砍刀',
-					106001: 'P92',
-					106002: 'P1911',
-					106003: 'R1895',
-					106004: 'P18C',
-					106005: 'R45',
-					106006: '散弹手枪',
-					106008: '蝎式手枪',
-					106010: '沙漠之鹰',
-					602004: '手榴弹',
-					602001: '震爆弹',
-					602002: '烟雾弹',
-					602003: '燃烧瓶',
-					602075: '铝热弹',
-					103014: 'MK20-H',
-				},
-			}
-		},
-		mounted() {
-			this.setRect(370, 355);
-		},
-		methods: {
-			BSLogin() {
-				var response = BSPHP.login(this.BSCard); //BS添加
-				if (response.indexOf("01|1081") != -1) {//BS添加
-					vant.Toast("登录成功");//BS添加
-					this.bsok = true;//BS添加
-				} else {//BS添加
-					vant.Toast("登录失败");//BS添加
-					this.bsok = false;//BS添加
-				}//BS添加
-			},//BS添加 抬头的括号也要单独加
-			setRect(w, h, x = -1, y = -1) {
-				var boxW = w;
-				var boxH = h;
-
-				var ayMenu = this.$refs.menuMain;
-				ayMenu.style.width = `${boxW}px`;
-				ayMenu.style.height = `${boxH}px`;
-				if (x == -1) ayMenu.style.left = `calc(50% - ${boxW / 2}px)`;
-				if (y == -1) ayMenu.style.top = `calc(50% - ${boxH / 2}px)`;
-
-
-				var menuBody = this.$refs.menuBody;
-				menuBody.style.height = `${boxH - 46 - 40}px`;
-			},
-			titleTouchStart(event) {
-				this.touchStartX = parseInt(event.touches[0].clientX);
-				this.touchStartY = parseInt(event.touches[0].clientY);
-
-				var ayMenu = this.$refs.menuMain;
-				this.menuLastX = ayMenu.offsetLeft;
-				this.menuLastY = ayMenu.offsetTop;
-			},
-			titleTouchMove(event) {
-				event.preventDefault();
-				var distanceX = event.touches[0].clientX - this.touchStartX;
-				var distanceY = event.touches[0].clientY - this.touchStartY;
-
-				var ayMenu = this.$refs.menuMain;
-				ayMenu.style.left = this.menuLastX + distanceX + "px";
-				ayMenu.style.top = this.menuLastY + distanceY + "px";
-			},
-
-			closeMenu() {
-				var menu = document.querySelector("#app");
-				menu.style.display = "none";
-				setWindowTouch(false);
-			},
-
-
-
-
-			changeLive() {
-				if (window.changeLive == 1) {
-					window.changeLive = 0;
-					let hideView = h5gg.loadPlugin("ayHide", "h5gg_hideview.dylib");
-					setButtonImage("http://111.67.201.204:5000/admin.jpg");
-					//关闭过直播
-					hideView.changeHidden(0);
-					//HOOK源触摸函数，同步过直播view的触摸开关
-					let orig_setWindowTouch = setWindowTouch;
-					setWindowTouch = function (isTouch) {
-						let boolNum = isTouch ? 1 : 0;
-						hideView.changeTouch(boolNum);
-						orig_setWindowTouch(isTouch);
-					}
-				} else {
-					window.changeLive = 1;
-					let hideView = h5gg.loadPlugin("ayHide", "h5gg_hideview.dylib");
-					setButtonImage("http://111.67.201.204:5000/admin.jpg");
-					//开启过直播
-					hideView.changeHidden(1);
-					//HOOK源触摸函数，同步过直播view的触摸开关
-					let orig_setWindowTouch = setWindowTouch;
-					setWindowTouch = function (isTouch) {
-						let boolNum = isTouch ? 1 : 0;
-						hideView.changeTouch(boolNum);
-						orig_setWindowTouch(isTouch);
-					}
-				}
-			},
-
-			fuckfps() {
-				clearInterval(window.drawTimer);
-				window.drawTimer = setInterval(function () {
-					if (app.checkboxList.isDraw) {
-						//console.log("1");
-						shadowDraw();
-						if (!window.fpscount) window.fpscount = 0;
-						if (!window.fpstime) window.fpstime = performance.now();
-						window.fpscount++;
-						if ((performance.now() - window.fpstime) > 2000) {
-							window.fps = window.fpscount;
-							window.fpstime = performance.now();
-							window.fpscount = 0;
-						}
-						ctx.textBaseline = "top";
-						ctx.textAlign = "center";
-						ctx.font = '40px "Arial, sans-serif"';
-						ctx.fillStyle = "aqua";
-						if (window.fps) ctx.fillText("FPS: " + window.fps, 150, 50);
-					} else {
-						clearCtx();
-					}
-				}, app.fps);
-			},
-		}
-	});
-
-	//脚本放在最后面, body加载完之后再执行
-	//激活webkit的button:active
-	document.body.addEventListener('touchstart', function () { });
-	//设置不可拖动
-	setWindowDrag(0, 0, 0, 0);
-	//设置按照屏幕像素尺寸绘图(高清模式)
-	const iosScale = window.devicePixelRatio;
-	let sWidth = 0; //屏幕宽
-	let sHeight = 0; //屏幕高
-	//创建画布，布满整个屏幕
-	let canvasDom = document.createElement("canvas");
-	document.body.appendChild(canvasDom);
-	canvasDom.style.height = "100%";
-	canvasDom.style.width = "100%";
-
-
-	//获取窗口信息
-	const layout = function () {
-		//window.orientation是设备握持方向, 不是屏幕显示方向
-		if (window.lastorientation == window.orientation) return;
-		window.lastorientation = window.orientation;
-		//window.screen中的宽高不会随着屏幕旋转更新(只会在初始化的时候固定)
-		if (Math.abs(window.orientation) == 90) {
-			//横屏模式
-			setWindowRect(0, 0, window.screen.height, window.screen.width);
-			canvasDom.width = window.screen.height * iosScale;
-			canvasDom.height = window.screen.width * iosScale;
-			sWidth = window.screen.height;
-			sHeight = window.screen.width;
-		} else {
-			//竖屏模式
-			setWindowRect(0, 0, window.screen.width, window.screen.height);
-			canvasDom.height = window.screen.height * iosScale;
-			canvasDom.width = window.screen.width * iosScale;
-			sWidth = window.screen.width;
-			sHeight = window.screen.height;
-		}
-	}
-
-	layout();//设置旋转屏幕时自动调整布局和画布
-	window.addEventListener("orientationchange", layout, false);
-	setButtonImage("http://111.67.201.204:5000/admin.jpg");
-	//*设置自定义的悬浮按钮图标点击动作
-	setButtonAction(function () {
-		let menu = document.querySelector("#app");
-		if (menu.style.display == 'none') {
-			menu.style.display = 'block';
-			//隐藏菜单之后, 设置触控穿透悬浮窗口
-			setWindowTouch(true);
-		} else {
-			menu.style.display = 'none';
-			//显示菜单之后, 设置触控不可穿透悬浮窗口
-			setWindowTouch(false);
-		}
-	});
-
-	const ctx = canvasDom.getContext('2d');
-	setLineWidth(iosScale);
-	var fontFamily = " Arial";
-	var cacheTimer = null; //数据缓存计时器，减少遍历次数，提高性能
-	var drawTimer = null; //绘图计时器，控制帧率
-	var actorCache = []; //对象地址缓存
-	//获取进程
-	//原有let baseAddr = Number(h5gg.getRangesList(0)[0].start); //aslr只读一次，能减少🐔🎱那么一点性能消耗
-	//原有let GWorld = 0; //世界全局变量，公用
-	function pid() {
-            if (!h5gg.getProcList("ShadowTrackerExt")[0]) { alert("请打开游戏!"); pid(); } else {
-
-                //获取进程pid      
-                var name = h5gg.getProcList("ShadowTrackerExt")[0].pid;
-                //设置进程为修改目标
-                h5gg.setTargetProc(name);
-                h5gg.clearResults();
+                            
+                            
+                        }
+                        
+                        .baiyunyz button:hover {
+                            background-color: #3bbf4c;
+                        }
+                    </style>
+    </head>
+    <div class="baiyunyz">
+<!--        <h1>猫咪</h1>-->
+<h1 style="color: yellow;">猫咪</h1>
+<!--        <h2 id="gg">公告</h2>-->
+        <form class="form" id="entry_form">
+            <input type="text" placeholder="输入卡号" id="card">
+                <button type="button" id="entry_btn">登录</button>
+                <div id="prompt" class="prompt"></div>
+        </form>
+    </div>
+    
+    <script src="https://smoba-1309934553.cos.ap-guangzhou.myqcloud.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // 修复获取公告和登录按钮问题
+        $(function () {
+            
+            $("#entry_btn").on("click", function () {
+                performLogin();
+            });
+            
+            function getAnnouncement() {
+                $("#gg").text(BSPHP.gg());
+            }
+            
+            function performLogin() {
+                alert(BSPHP.login($("#card").val()));
+            }
+            
+            $(document).keydown(function (event) {
+                if (event.keyCode === 13) {
+                    performLogin();
+                }
+            });
+            
+            var savedCard = localStorage.getItem("card");
+            if (savedCard) {
+                $("#card").val(savedCard);
+            }
+            
+            getAnnouncement();
+        });
+    </script>
+    
+    <script>
+        const G_BSPHP_URL = "http://124.223.167.6:5588/AppEn.php?appid=98741236&m=7961de316da6303410c27ccca09e21c1";
+        const G_BSPHP_KEY = "7f3eef9d996b198770b3fb0c73ebe8ee";
+        const Base64 = {
+            encode: (str) => {
+                return window.btoa(unescape(encodeURIComponent(str)));
+            },
+            decode: (str) => {
+                return decodeURIComponent(escape(window.atob(str)));
             }
         }
-        pid()
-        var X = h5gg.getRangesList('ShadowTrackerExtra');
-        var baseAddr = Number(X[0].start);
-        var GWorld = 0;
-        let myTeam = 0
-
-
-	function drawCache() {
-		if (isNull(GWorld)) return;
-		const Level = readLong(GWorld + 0x90); //Level* PersistentLevel
-		//LineBatchComponent* LineBatcher
-		//LineBatchComponent* ForegroundLineBatcher
-		//获取所有对象数组
-		const ActorArray = readLong(Level + 0xA0);
-		//LineBatchComponent* PersistentLineBatcher
-		//GameNetworkManager* NetworkManager
-		//获取所有对象的数量
-		const ActorCount = readInt(Level + 0xA8);
-		const tempArr = [];
-		//遍历
-		for (var i = 0; i < ActorCount; i++) {
-        var actor = readLong(ActorArray + i * 8);
-        if (isNull(actor)) continue;
-
-        //HealthMax
-            var hpmax = readFloat(actor + 0xd68);
-
-        if (hpmax == 100 || hpmax == 110|| hpmax == 120 || hpmax == 140 || hpmax == 160 || hpmax == 180 || hpmax == 200) {
-          tempArr.push(actor);
+        
+        
+        function bin2hex(s) {
+            var i, l, o = '',
+            n;
+            s += '';
+            
+            for (i = 0, l = s.length; i < l; i++) {
+                n = s.charCodeAt(i)
+                .toString(16);
+                o += n.length < 2 ? '0' + n : n;
+            }
+            return o;
         }
-      }
-      actorCache = tempArr;
-	}
-
-	function shadowDraw() {
-
-		clearCtx();
-      //世界地址
-        GWorld = readLong(baseAddr + 0xB064888);
-      if (isNull(GWorld)) return;
-      //NetDriver* NetDriver
-      var NetDriver = readLong(GWorld + 0x98);
-      //NetConnection* ServerConnection
-      var ServerConnection = readLong(NetDriver + 0x88);
-      var localPlayerController = readLong(ServerConnection + 0x30);
-
-        var mySelf = readLong(localPlayerController + 0x538);
-      //if (isNull(mySelf)) return;
-      //int TeamID
-        var teamCopy = readInt(mySelf + 0xa48);
-      myTeam = teamCopy <= 100 ? teamCopy : myTeam
-      //PlayerCameraManager* PlayerCameraManager
-        var playerCameraManager = readLong(localPlayerController + 0x5c0);
-      
-      if (isNull(playerCameraManager)) return;
-      //TViewTarget ViewTarget
-        var povAddr = playerCameraManager + 0x1140 + 0x10;
-      var camViewInfo = {
-        Location: {
-          X: readFloat(povAddr),
-          Y: readFloat(povAddr + 4),
-          Z: readFloat(povAddr + 4 + 4)
-        },
-        Rotation: {
-          Pitch: readFloat(povAddr + 0x18),
-          Yaw: readFloat(povAddr + 0x18 + 4),
-          Roll: readFloat(povAddr + 0x18 + 4 + 4)
-        },
-        FOV: readFloat(povAddr + 0x24)
-      }
-		//雷达，获取相机旋转视角
-		let camAngle = camViewInfo.Rotation.Yaw;
-		//一帧只计算一次，减少性能消耗
-		const tempMatrix = RotatorToMatrix(camViewInfo.Rotation);
-
-		let playerCout = 0;
-		let ai = 0;
-		let topEnemy = 0;
-		let vehicle = 0;
-
-		for (let i = 0; i < actorCache.length; i++) {
-			//排除自己
-			const actor = actorCache[i];
-			if (mySelf == actor) continue;
-			//死亡判断 bDead
-            const bDead = readInt(actor + 0xdc8)
-			if (bDead != 2) continue;
-			//排除队友
-            const team = readInt(actor + 0xa48); //int TeamID
-			if (myTeam == team) continue;
-			//排除小黄鸡
-			if (team == -1) continue;
-			//排除当前观战队伍
-			if (team == app.team) continue;
-			//最大生命值
-            const hpmax = readFloat(actor + 0xd68); //float HealthMax;	
-			//获取生命值
-            const hp = readFloat(actor + 0xd60); //float Health;
-			const renhp = 100 * hp / hpmax;
-			//获取人物状态
-            const StatusOffset = readInt(actor + 0x12c8); //PawnStateRepSyncData PawnStateRepSyncData  
-            const rootComponent = readLong(actor + 0x268); //SceneComponent* RootComponent
-			if (isNull(rootComponent)) continue;
-
-			const worldPos = {
-				X: readFloat(rootComponent + 0x1B0),
-                Y: readFloat(rootComponent + 0x1B0 + 4),
-                Z: readFloat(rootComponent + 0x1B0 + 4 + 4)
-			}
-			
-		
-			
-
-
-
-			//计算距离
-			const distX = (worldPos.X - camViewInfo.Location.X) / 100;
-			const distY = (worldPos.Y - camViewInfo.Location.Y) / 100;
-			let distance = (distX * distX) + (distY * distY);
-			const distZ = (worldPos.Z - camViewInfo.Location.Z) / 100;
-			distance = Math.ceil(Math.sqrt((distZ * distZ) + distance));
-			//敌人yaw  单位：角度
-            const angleOffset = readFloat(actor + 0x550);
-			//雷达获取敌人世界坐标
-			const wradPos = {
-				X: distX,
-				Y: distY,
-				dist: distance
-			};
-			const wAngle = (180.0 / Math.PI) * Math.atan2(wradPos.Y, wradPos.X); //雷达，角度相关
-			const Angle = camAngle - wAngle + 90; //雷达，角度相关
-			const towards = angleOffset - camAngle - 90; //雷达敌人视角朝向
-
-			//雷达获取敌人屏幕坐标
-			const radPos = {
-				X: wradPos.dist * Math.cos(Angle / 180.0 * Math.PI),
-				Y: wradPos.dist * Math.sin(Angle / 180.0 * Math.PI)
-			};
-
-			const zb1 = {
-				X: worldPos.X,
-				Y: worldPos.Y,
-				Z: worldPos.Z + 80.0
-			}
-
-			const zb2 = {
-				X: worldPos.X,
-				Y: worldPos.Y,
-				Z: worldPos.Z - 80.0
-			}
-
-			//顶部方框线
-			const fkzb1 = world2Screen(zb1, camViewInfo, tempMatrix);
-			//底部方框线
-			const fkzb2 = world2Screen(zb2, camViewInfo, tempMatrix);
-			const fkgao = fkzb2.Y - fkzb1.Y;
-			const fkkuan = fkgao / 2;
-			//手持枪械
-            const lastUpdateStatusKeyListOffset = 0x29a8; //LastUpdateStatusKeyList
-			const equipWeaponOffset = 0x20; //STExtraWeapon* EquipWeapon
-			const weaponOffset = lastUpdateStatusKeyListOffset + equipWeaponOffset;
-            const weaponIDOffset = 0x9a8; //int RepWeaponID
-			const my_weapon = readLong(actor + weaponOffset);
-			const weaponid = readInt(my_weapon + weaponIDOffset);
-			//载具
-            const nameId = readLong(actor + 0x7bc);
-			const vehicleid = readLong(actor + 0x16fc).toString().slice(0, 4);
-            const vehicleCommonComponent = readLong(actor + 0xa28); //通用组件 //VehicleCommonComponent* VehicleCommon;
-            const vehicleHPMax = readFloat(vehicleCommonComponent + 0x1b4); //最大血量 //float HPMax;
-            const vehicleHP = readFloat(vehicleCommonComponent + 0x1b8); //血量 //float HP;
-			const cartHP = 100 * vehicleHP / vehicleHPMax;
-            const vehicleFuelMax = readFloat(vehicleCommonComponent + 0x1d4); //最大油量 //float FuelMax;
-            const vehicleFuel = readFloat(vehicleCommonComponent + 0x1d8); //油量 //float Fuel;
-			const cartFuel = 100 * vehicleFuel / vehicleFuelMax;
-			if (nameId != 1) {
-                const bIsAI = Number(h5gg.getValue(actor + 0xa64, "U8")); //bool bIsAI
-				//伞兵计数
-				if (StatusOffset == 33554448 || StatusOffset == 33554449) topEnemy += 1;
-				//读名字可能消耗性能，不需要注释即可⬇️⬇️⬇️⬇️⬇️⬇️
-				//只对经典风格生效
-				//PlayerName
-				let name = "";
-				if (app.checkboxList.isInfo) {
-					//超出屏幕不计算
-					if (fkzb1.X > 0 && fkzb1.Y > 0 && fkzb1.X < sWidth && fkzb1.Y < sHeight) {
-                        const nameAddr = readLong(actor + 0x9d0);
-						name = nameAddr.toString(16);
-						if (!isNull(nameAddr)) {
-							name = "";
-							for (let s = 0; s < 14; s++) {
-								const after = Number(h5gg.getValue(nameAddr + s * 2, "U8")).toString(16).padStart(2, '0');
-								const before = Number(h5gg.getValue(nameAddr + s * 2 + 1, "U8")).toString(16).padStart(2, '0');
-								const charCode = before + after;
-								if (charCode == "0000") break;
-								name += String.fromCharCode(parseInt(charCode, 16));
-							}
-						}
-					}
-				}
-				//读名字可能消耗性能，不需要注释即可⬆️⬆️⬆️⬆️⬆️⬆️
-
-				//drawText("雷神", sWidth / 5.5, 15, 15, "red", true);//屏幕显示
-
-				/***************骨骼函数*******************/
-				//骨骼函数 未更新三个
-                const Mesh = readLong(actor + 0x5b8);
-                const human = Mesh + 0x1A0;
-                const boneArray = readLong(Mesh + 0x6c0);
-				const meshTrans = {
-					Rotation: {
-						x: readFloat(human),
-						y: readFloat(human + 4),
-						z: readFloat(human + 8),
-						w: readFloat(human + 12),
-					},
-					Translation: {
-						X: readFloat(human + 16),
-						Y: readFloat(human + 20),
-						Z: readFloat(human + 24),
-						W: readFloat(human + 28),
-					},
-					Scale3D: {
-						X: readFloat(human + 32),
-						Y: readFloat(human + 36),
-						Z: readFloat(human + 40),
-					},
-				}
-				const c2wMatrix = TransformToMatrix(meshTrans);
-
-				let bonetou = {
-					X: 0,
-					Y: 0
-				};
-				let bonebz = {
-					X: 0,
-					Y: 0
-				};
-				let bonezj = {
-					X: 0,
-					Y: 0
-				};
-				let boneyj = {
-					X: 0,
-					Y: 0
-				};
-				let bonezz = {
-					X: 0,
-					Y: 0
-				};
-				let boneyz = {
-					X: 0,
-					Y: 0
-				};
-				let bonezs = {
-					X: 0,
-					Y: 0
-				};
-				let boneys = {
-					X: 0,
-					Y: 0
-				};
-				let bonepg = {
-					X: 0,
-					Y: 0
-				};
-				let bonezp = {
-					X: 0,
-					Y: 0
-				};
-				let boneyp = {
-					X: 0,
-					Y: 0
-				};
-				let bonezx = {
-					X: 0,
-					Y: 0
-				};
-				let boneyx = {
-					X: 0,
-					Y: 0
-				};
-				let bonezjo = {
-					X: 0,
-					Y: 0
-				};
-				let boneyjo = {
-					X: 0,
-					Y: 0
-				};
-
-				if (app.checkboxList.isBone) {
-					//动态骨骼 超出屏幕不计算
-					if (distance <= app.gugefw && fkzb1.X > 0 && fkzb1.Y > 0 && fkzb1.X < sWidth && fkzb1.Y < sHeight) {
-						if (app.guge == 'qg') {
-							bonetou = getBoneWorldPos(boneArray + 6 * 48, c2wMatrix); //头
-							bonebz = getBoneWorldPos(boneArray + 5 * 48, c2wMatrix); //脖子
-							bonezj = getBoneWorldPos(boneArray + 12 * 48, c2wMatrix); //左肩
-							boneyj = getBoneWorldPos(boneArray + 33 * 48, c2wMatrix); //右肩
-							bonezz = getBoneWorldPos(boneArray + 13 * 48, c2wMatrix); //左肘
-							boneyz = getBoneWorldPos(boneArray + 34 * 48, c2wMatrix); //右肘
-							bonezs = getBoneWorldPos(boneArray + 14 * 48, c2wMatrix); //左手
-							boneys = getBoneWorldPos(boneArray + 35 * 48, c2wMatrix); //右手
-							bonepg = getBoneWorldPos(boneArray + 1 * 48, c2wMatrix); //骨盆
-							bonezx = getBoneWorldPos(boneArray + 54 * 48, c2wMatrix); //左膝盖
-							boneyx = getBoneWorldPos(boneArray + 58 * 48, c2wMatrix); //右膝盖
-							bonezjo = getBoneWorldPos(boneArray + 55 * 48, c2wMatrix); //左脚
-							boneyjo = getBoneWorldPos(boneArray + 59 * 48, c2wMatrix); //右脚
-						} else if (app.guge == 'bg') {
-							bonepg = getBoneWorldPos(boneArray + 1 * 48, c2wMatrix); //骨盆
-							bonezx = getBoneWorldPos(boneArray + 54 * 48, c2wMatrix); //左膝盖
-							boneyx = getBoneWorldPos(boneArray + 58 * 48, c2wMatrix); //右膝盖
-							bonezjo = getBoneWorldPos(boneArray + 55 * 48, c2wMatrix); //左脚
-							boneyjo = getBoneWorldPos(boneArray + 59 * 48, c2wMatrix); //右脚
-						}
-					}
-				}
-				let dtbonetou = world2Screen(bonetou, camViewInfo, tempMatrix); //头
-				let dtbonebz = world2Screen(bonebz, camViewInfo, tempMatrix); //脖子
-				let dtbonezj = world2Screen(bonezj, camViewInfo, tempMatrix); //左肩
-				let dtboneyj = world2Screen(boneyj, camViewInfo, tempMatrix); //右肩
-				let dtbonezz = world2Screen(bonezz, camViewInfo, tempMatrix); //左肘
-				let dtboneyz = world2Screen(boneyz, camViewInfo, tempMatrix); //右肘
-				let dtbonezs = world2Screen(bonezs, camViewInfo, tempMatrix); //左手
-				let dtboneys = world2Screen(boneys, camViewInfo, tempMatrix); //右手
-				let dtbonepg = world2Screen(bonepg, camViewInfo, tempMatrix); //骨盆
-				let dtbonezx = world2Screen(bonezx, camViewInfo, tempMatrix); //左膝盖
-				let dtboneyx = world2Screen(boneyx, camViewInfo, tempMatrix); //右膝盖
-				let dtbonezjo = world2Screen(bonezjo, camViewInfo, tempMatrix); //左脚
-				let dtboneyjo = world2Screen(boneyjo, camViewInfo, tempMatrix); //右脚
-				/***************动态骨骼*******************/
-
-				/***************动态3d框*******************/
-				if (app.checkboxList.isBox && app.fangkuang == '2' || app.zimiao) {
-					if (distance <= 100 && fkzb1.X > 0 && fkzb1.Y > 0 && fkzb1.X < sWidth && fkzb1.Y < sHeight) {
-						bonetou = getBoneWorldPos(boneArray + 6 * 48, c2wMatrix); //头	
-					}
-				}
-				let bonetou3d = world2Screen(bonetou, camViewInfo, tempMatrix); //头
-				const rwg = 88; //z
-				const rwk = 33; //x,y
-				const rwk2 = (Math.sqrt(2 * rwk * rwk));
-
-				//3d方框上
-				const zqs = {
-					X: worldPos.X + rwk2 * Math.cos((angleOffset + 135) * Math.PI / 180),
-					Y: worldPos.Y + rwk2 * Math.sin((angleOffset + 135) * Math.PI / 180),
-					Z: bonetou.Z + 16
-				}
-				const yqs = {
-					X: worldPos.X + rwk2 * Math.cos((angleOffset + 45) * Math.PI / 180),
-					Y: worldPos.Y + rwk2 * Math.sin((angleOffset + 45) * Math.PI / 180),
-					Z: bonetou.Z + 16
-				}
-				const zhs = {
-					X: worldPos.X + rwk2 * Math.cos((angleOffset + 225) * Math.PI / 180),
-					Y: worldPos.Y + rwk2 * Math.sin((angleOffset + 225) * Math.PI / 180),
-					Z: bonetou.Z + 16
-				}
-				const yhs = {
-					X: worldPos.X + rwk2 * Math.cos((angleOffset + 315) * Math.PI / 180),
-					Y: worldPos.Y + rwk2 * Math.sin((angleOffset + 315) * Math.PI / 180),
-					Z: bonetou.Z + 16
-				}
-
-				//3d方框下
-				const zqx = {
-					X: worldPos.X + rwk2 * Math.cos((angleOffset + 135) * Math.PI / 180),
-					Y: worldPos.Y + rwk2 * Math.sin((angleOffset + 135) * Math.PI / 180),
-					Z: worldPos.Z - rwg
-				}
-				const yqx = {
-					X: worldPos.X + rwk2 * Math.cos((angleOffset + 45) * Math.PI / 180),
-					Y: worldPos.Y + rwk2 * Math.sin((angleOffset + 45) * Math.PI / 180),
-					Z: worldPos.Z - rwg
-				}
-				const zhx = {
-					X: worldPos.X + rwk2 * Math.cos((angleOffset + 225) * Math.PI / 180),
-					Y: worldPos.Y + rwk2 * Math.sin((angleOffset + 225) * Math.PI / 180),
-					Z: worldPos.Z - rwg
-				}
-				const yhx = {
-					X: worldPos.X + rwk2 * Math.cos((angleOffset + 315) * Math.PI / 180),
-					Y: worldPos.Y + rwk2 * Math.sin((angleOffset + 315) * Math.PI / 180),
-					Z: worldPos.Z - rwg
-				}
-				//上
-				const zhs1 = world2Screen(zhs, camViewInfo, tempMatrix);
-				const yhs1 = world2Screen(yhs, camViewInfo, tempMatrix);
-				const zqs1 = world2Screen(zqs, camViewInfo, tempMatrix);
-				const yqs1 = world2Screen(yqs, camViewInfo, tempMatrix);
-				//下
-				const zhx1 = world2Screen(zhx, camViewInfo, tempMatrix);
-				const yhx1 = world2Screen(yhx, camViewInfo, tempMatrix);
-				const zqx1 = world2Screen(zqx, camViewInfo, tempMatrix);
-				const yqx1 = world2Screen(yqx, camViewInfo, tempMatrix);
-				/***************3D框*******************/
-
-				//记录要绘制的全部信息
-				const actorInfo = {
-					x: fkzb1.X, //x坐标
-					y: fkzb1.Y, //y坐标
-					w: fkkuan, //宽
-					h: fkgao, //高
-					//hp: hp, //生命值
-					hp: renhp, //生命值
-					isAI: bIsAI, //是否为机器人
-					team: team, //队伍
-					name: name, //名字
-					dis: distance, //距离
-					weaponid: weaponid, //手持枪械
-					radx: radPos.X, //雷达x坐标
-					rady: radPos.Y, //雷达y坐标
-					towards: towards, //人物朝向
-					zt: StatusOffset, //人物状态
-
-					//3dx
-					zhsx: zhs1.X,
-					yhsx: yhs1.X,
-					zqsx: zqs1.X,
-					yqsx: yqs1.X,
-
-					zhxx: zhx1.X,
-					yhxx: yhx1.X,
-					zqxx: zqx1.X,
-					yqxx: yqx1.X,
-
-					//3dy
-					zhsy: zhs1.Y,
-					yhsy: yhs1.Y,
-					zqsy: zqs1.Y,
-					yqsy: yqs1.Y,
-
-					zhxy: zhx1.Y,
-					yhxy: yhx1.Y,
-					zqxy: zqx1.Y,
-					yqxy: yqx1.Y,
-					toux: bonetou3d.X,
-					touy: bonetou3d.Y,
-
-					//动态骨骼
-					bonetoux: dtbonetou.X,
-					bonetouy: dtbonetou.Y,
-					bonebzx: dtbonebz.X,
-					bonebzy: dtbonebz.Y,
-					bonezjx: dtbonezj.X,
-					bonezjy: dtbonezj.Y,
-					boneyjx: dtboneyj.X,
-					boneyjy: dtboneyj.Y,
-					bonezzx: dtbonezz.X,
-					bonezzy: dtbonezz.Y,
-					boneyzx: dtboneyz.X,
-					boneyzy: dtboneyz.Y,
-					bonezsx: dtbonezs.X,
-					bonezsy: dtbonezs.Y,
-					boneysx: dtboneys.X,
-					boneysy: dtboneys.Y,
-					bonepgx: dtbonepg.X,
-					bonepgy: dtbonepg.Y,
-					bonezxx: dtbonezx.X,
-					bonezxy: dtbonezx.Y,
-					boneyxx: dtboneyx.X,
-					boneyxy: dtboneyx.Y,
-					bonezjox: dtbonezjo.X,
-					bonezjoy: dtbonezjo.Y,
-					boneyjox: dtboneyjo.X,
-					boneyjoy: dtboneyjo.Y,
-
-				};
-				if (distance < app.dis) { //可调绘制范围
-					shadowInfo(actorInfo);
-				}
-				if (bIsAI) {
-					ai++;
-				} else {
-					playerCout++;
-				}
-			} else {
-				//载具
-				if (app.checkboxList.isvehicle) {
-					if (app.huizhi == '1') color = "white";
-					if (app.huizhi == '2') color = "yellow";
-					if (cartHP > 0 && distance > 10 && distance <= app.zaijufw && fkzb1.X > 0 && fkzb1.Y > 0 && fkzb1.X < sWidth && fkzb1.Y < sHeight) {
-						//类型
-						const zaiju = app.zaiju[vehicleid];
-						drawText(zaiju + `[${distance}m]`, fkzb1.X, fkzb1.Y - 10, 10, color, "center", true);
-						//耐久
-						if (app.naijiu) {
-							drawCircular(fkzb1.X - 9, fkzb1.Y + 20, Math.ceil(cartHP), 7, "#28ff1d", 3, false);
-							drawText("🩸", fkzb1.X - 9, fkzb1.Y + 9, 7, "yellow", "center", true);
-						}
-						//油量
-						if (app.youhao) {
-							drawCircular(fkzb1.X + 9, fkzb1.Y + 20, Math.ceil(cartFuel), 7, "#28ff1d", 3, false);
-							drawText("🛢️", fkzb1.X + 9, fkzb1.Y + 9, 7, "yellow", "center", true);
-						}
-					}
-				}
-				vehicle++;
-			}
-		}
-
-		//伞兵
-		if (topEnemy > 0) {
-			drawText(`空降敌人: ${topEnemy}`, sWidth / 2, sHeight / 8, 22, "yellow", "center", true);//⚠️
-		}
-		//人数统计
-		drawRoundRect(sWidth / 2 - 90, 0 + app.renshu, 0, 0, 0, 'rgba(255,255,255,0.5)', true); //利用圆角矩形填充 原始 sWidth / 2 - 90, 0 + app.renshu, 180, 38, 20
-		if (playerCout + ai > 0) {
-			drawText(" ", sWidth / 2, - 30 + app.renshu, 32, "white", "center", true);//⚠️
-		}
-		if (playerCout + ai < 1) {
-			drawText(" ", sWidth / 2, - 30 + app.renshu, 32, "white", "center", true);//♻️
-		}
-		drawText(" ", sWidth / 2 - 60, - 25 + app.renshu, 28, "white", "center", true);//🧛🏻
-		drawText(" ", sWidth / 2 + 62, - 25 + app.renshu, 28, "white", "center", true);//🐔
-		//真人总数
-		drawText(playerCout, sWidth / 2 - 30, - 20 + app.renshu, 25, playerCout > 0 ? "#f00" : "white", "center", true);
-		//人机总数
-		drawText(ai, sWidth / 2 + 32, - 20 + app.renshu, 25, ai > 0 ? "lime" : "white", "center", true);
-
-		//雷达
-		if (app.checkboxList.isleida) {
-			if (app.leida == '1') { //雷达大
-				//起点xy，矩形宽高，颜色，是否填充矩形
-				drawCircular(100 + app.leidaX, 100 + app.leidaY, 100, 100, "rgba(0,0,0,0.15)", true); //大圈圈圆形填充
-				drawCircular(100 + app.leidaX, 100 + app.leidaY, 100, 100, "khaki", 2, false); //大圈圈
-				drawCircular(100 + app.leidaX, 100 + app.leidaY, 100, 60, "pink", 2, false); //小圈圈
-				drawLine(30 + app.leidaX, 30 + app.leidaY, 100 + app.leidaX, 100 + app.leidaY, "yellow", 2); //左竖斜线
-				drawLine(170 + app.leidaX, 30 + app.leidaY, 100 + app.leidaX, 100 + app.leidaY, "yellow", 2); //右竖斜线
-			} else if (app.leida == '2') { //雷达中
-				//起点xy，矩形宽高，颜色，是否填充矩形
-				drawCircular(80 + app.leidaX, 80 + app.leidaY, 100, 80, "rgba(0,0,0,0.15)", 2); //大圈圈圆形填充
-				drawCircular(80 + app.leidaX, 80 + app.leidaY, 100, 80, "khaki", 2, false); //大圈圈
-				drawCircular(80 + app.leidaX, 80 + app.leidaY, 100, 48, "pink", 2, false); //小圈圈
-				drawLine(24 + app.leidaX, 24 + app.leidaY, 80 + app.leidaX, 80 + app.leidaY, "yellow", 2); //左竖斜线
-				drawLine(136 + app.leidaX, 24 + app.leidaY, 80 + app.leidaX, 80 + app.leidaY, "yellow", 2); //右竖斜线
-			} else if (app.leida == '3') { //雷达小
-				//起点xy，矩形宽高，颜色，是否填充矩形
-				drawCircular(60 + app.leidaX, 60 + app.leidaY, 100, 60, "rgba(0,0,0,0.15)", true); //大圈圈圆形填充
-				drawCircular(60 + app.leidaX, 60 + app.leidaY, 100, 60, "khaki", 2, false); //大圈圈
-				drawCircular(60 + app.leidaX, 60 + app.leidaY, 100, 36, "pink", 2, false); //小圈圈
-				drawLine(18 + app.leidaX, 18 + app.leidaY, 60 + app.leidaX, 60 + app.leidaY, "yellow", 2); //左竖斜线
-				drawLine(102 + app.leidaX, 18 + app.leidaY, 60 + app.leidaX, 60 + app.leidaY, "yellow", 2); //右竖斜线
-			}
-		}
-	}
-	
-
-	function shadowInfo(objectInfo) {
-		//人机判断 是的话对标变为AI
-		if (objectInfo.isAI) objectInfo.team = "AI";
-
-		//雷达
-		if (app.checkboxList.isleida) {
-			if (app.leida == '1') { //雷达大
-				if (objectInfo.dis < 340) {
-					//绘制圆形带箭头 中心点xy,半径, 箭头旋转角度, 圆形颜色，箭头颜色（雷达点朝向）
-					drawCMark((objectInfo.radx / 3.5 + 100) + app.leidaX, (-objectInfo.rady / 3.5 + 100) + app.leidaY, 4, objectInfo.towards, objectInfo.hp <= 0 ? "white" : objectInfo.isAI ? "lime" : "red", "white");
-				}
-			} else if (app.leida == '2') { //雷达中
-				if (objectInfo.dis < 340) {
-					drawCMark((objectInfo.radx / 4.4 + 80) + app.leidaX, (-objectInfo.rady / 4.4 + 80) + app.leidaY, 3.2, objectInfo.towards, objectInfo.hp <= 0 ? "white" : objectInfo.isAI ? "lime" : "red", "white");
-				}
-			} else if (app.leida == '3') { //雷达小
-				if (objectInfo.dis < 340) {
-					drawCMark((objectInfo.radx / 5.8 + 60) + app.leidaX, (-objectInfo.rady / 5.8 + 60) + app.leidaY, 2.4, objectInfo.towards, objectInfo.hp <= 0 ? "white" : objectInfo.isAI ? "lime" : "red", "white");
-				}
-			}
-		}
-
-		//射线
-		if (app.checkboxList.isLine) {
-			if (app.huizhi == '1') color = "white";
-			if (app.huizhi == '1' && objectInfo.isAI) color = "#28ff1d";
-			if (app.huizhi == '2') color = "#28ff1d";
-			if (app.huizhi == '2' && objectInfo.isAI) color = "white";
-			if (objectInfo.hp > 0) {
-				if (app.huizhi == '1' && app.tietu == '1') {
-					drawLine(sWidth / 2, 10 + app.renshu, objectInfo.x, objectInfo.y - 30, objectInfo.isAI ? "white" : objectInfo.dis >= 300 ? "black" : objectInfo.dis >= 200 ? "green" : objectInfo.dis >= 100 ? "yellow" : objectInfo.dis >= 50 ? "blue" : "red");
-				} else if (app.huizhi == '2' || app.huizhi == '1' && app.tietu == '2') {
-					drawLine(sWidth / 2, 10 + app.renshu, objectInfo.x, objectInfo.y - 30, objectInfo.isAI ? "white" : objectInfo.dis >= 300 ? "black" : objectInfo.dis >= 200 ? "green" : objectInfo.dis >= 100 ? "yellow" : objectInfo.dis >= 50 ? "blue" : "red");
-				}
-			}
-		}
-
-		//自瞄绘图
-		if (app.zimiao) {
-			//圆圈
-			drawCircular(sWidth / 2, sHeight / 2, 100, app.zimiaodx, "red", 1, false);
-			if (objectInfo.dis <= app.zimiaojl && objectInfo.x > 0 && objectInfo.y > 0 && objectInfo.x < sWidth && objectInfo.y < sHeight) {
-				//线条
-				drawLine(objectInfo.toux, objectInfo.touy, sWidth / 2, sHeight / 2, "aqua", 2);
-			}
-		}
-
-		//超出屏幕只绘制射线 背敌
-		if (objectInfo.x < 0 || objectInfo.y < 0 || objectInfo.x > sWidth || objectInfo.y > sHeight) {
-			// 背敌
-			if (app.checkboxList.isBeid) {
-				if (objectInfo.x < 0) objectInfo.x = 20;
-				if (objectInfo.y < 0) objectInfo.y = 20;
-				if (objectInfo.x > sWidth) objectInfo.x = sWidth - 20;
-				if (objectInfo.y > sHeight) objectInfo.y = sHeight - 20;
-				drawCircular(objectInfo.x, objectInfo.y, 100, 15, objectInfo.isAI ? "rgba(0,255,0,0.6)" : "rgba(255,0,0,0.6)", true);
-				drawText(`${objectInfo.dis}m`, objectInfo.x, objectInfo.y - 16, 10, "white", "center", true);
-			}
-			return
-		}
-
-		//绘制风格
-		if (app.huizhi == '1') {
-			//方框
-			if (app.checkboxList.isBox) {
-				//方框风格
-				if (app.fangkuang == '1') {
-					//2D巡查方框
-					drawMyRect(objectInfo.x - objectInfo.w / 2, objectInfo.y, objectInfo.w, objectInfo.h, objectInfo.hp <= 0 ? "yellow" : "#00ffff", false);
-				} else if (app.fangkuang == '2') {
-					//动态3D方框 距离小于100米绘制3d框
-					if (objectInfo.dis <= 100) {
-						//上
-						drawLine(objectInfo.yqsx, objectInfo.yqsy, objectInfo.zqsx, objectInfo.zqsy, objectInfo.hp <= 0 ? "yellow" : "white", app.xian);
-						drawLine(objectInfo.zqsx, objectInfo.zqsy, objectInfo.zhsx, objectInfo.zhsy, objectInfo.hp <= 0 ? "yellow" : "white", app.xian);
-						drawLine(objectInfo.zhsx, objectInfo.zhsy, objectInfo.yhsx, objectInfo.yhsy, objectInfo.hp <= 0 ? "yellow" : "white", app.xian);
-						drawLine(objectInfo.yhsx, objectInfo.yhsy, objectInfo.yqsx, objectInfo.yqsy, objectInfo.isAI ? "lime" : "red", app.xian);
-						//下
-						drawLine(objectInfo.yqxx, objectInfo.yqxy, objectInfo.zqxx, objectInfo.zqxy, objectInfo.hp <= 0 ? "yellow" : "white", app.xian);
-						drawLine(objectInfo.zqxx, objectInfo.zqxy, objectInfo.zhxx, objectInfo.zhxy, objectInfo.hp <= 0 ? "yellow" : "white", app.xian);
-						drawLine(objectInfo.zhxx, objectInfo.zhxy, objectInfo.yhxx, objectInfo.yhxy, objectInfo.hp <= 0 ? "yellow" : "white", app.xian);
-						drawLine(objectInfo.yhxx, objectInfo.yhxy, objectInfo.yqxx, objectInfo.yqxy, objectInfo.isAI ? "lime" : "red", app.xian);
-						//从上到下
-						drawLine(objectInfo.zhsx, objectInfo.zhsy, objectInfo.zhxx, objectInfo.zhxy, objectInfo.hp <= 0 ? "yellow" : "white", app.xian);
-						drawLine(objectInfo.yhsx, objectInfo.yhsy, objectInfo.yhxx, objectInfo.yhxy, objectInfo.isAI ? "lime" : "red", app.xian);
-						drawLine(objectInfo.zqsx, objectInfo.zqsy, objectInfo.zqxx, objectInfo.zqxy, objectInfo.hp <= 0 ? "yellow" : "white", app.xian);
-						drawLine(objectInfo.yqsx, objectInfo.yqsy, objectInfo.yqxx, objectInfo.yqxy, objectInfo.isAI ? "lime" : "red", app.xian);
-						//距离大于100米绘制2d框
-					} else if (objectInfo.dis > 100) {
-						//drawMyRect(objectInfo.x - objectInfo.w / 2, objectInfo.y, objectInfo.w, objectInfo.h, objectInfo.hp <= 0 ? "yellow" : objectInfo.isAI ? "lime" : "#00ffff", false);
-						drawRect(objectInfo.x - objectInfo.w / 2, objectInfo.y, objectInfo.w, objectInfo.h, objectInfo.hp <= 0 ? "yellow" : objectInfo.isAI ? "lime" : "red", false, app.xian);
-					}
-				}
-			}
-
-			//骨骼
-			if (app.checkboxList.isBone) {
-				if (objectInfo.dis <= app.gugefw) {
-					//动态全骨
-					if (app.guge == 'qg') {
-						//drawCircular(objectInfo.bonetoux, objectInfo.bonetouy - 1, 100, objectInfo.w/9, 'yellow', false);
-						drawLine(objectInfo.bonetoux, objectInfo.bonetouy, objectInfo.bonebzx, objectInfo.bonebzy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonebzx, objectInfo.bonebzy, objectInfo.bonezjx, objectInfo.bonezjy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonebzx, objectInfo.bonebzy, objectInfo.boneyjx, objectInfo.boneyjy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonezjx, objectInfo.bonezjy, objectInfo.bonezzx, objectInfo.bonezzy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.boneyjx, objectInfo.boneyjy, objectInfo.boneyzx, objectInfo.boneyzy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonezzx, objectInfo.bonezzy, objectInfo.bonezsx, objectInfo.bonezsy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.boneyzx, objectInfo.boneyzy, objectInfo.boneysx, objectInfo.boneysy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonebzx, objectInfo.bonebzy, objectInfo.bonepgx, objectInfo.bonepgy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonepgx, objectInfo.bonepgy, objectInfo.bonezxx, objectInfo.bonezxy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonezxx, objectInfo.bonezxy, objectInfo.bonezjox, objectInfo.bonezjoy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonepgx, objectInfo.bonepgy, objectInfo.boneyxx, objectInfo.boneyxy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.boneyxx, objectInfo.boneyxy, objectInfo.boneyjox, objectInfo.boneyjoy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						//动态半骨
-					} else if (app.guge == 'bg') {
-						drawLine(objectInfo.bonepgx, objectInfo.bonepgy, objectInfo.bonezxx, objectInfo.bonezxy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonezxx, objectInfo.bonezxy, objectInfo.bonezjox, objectInfo.bonezjoy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonepgx, objectInfo.bonepgy, objectInfo.boneyxx, objectInfo.boneyxy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.boneyxx, objectInfo.boneyxy, objectInfo.boneyjox, objectInfo.boneyjoy, objectInfo.isAI ? "white" : "yellow", app.xian);
-					}
-				} else if (objectInfo.dis > app.gugefw) {
-					//巡查2D方框
-					drawMyRect(objectInfo.x - objectInfo.w / 2, objectInfo.y, objectInfo.w, objectInfo.h, objectInfo.hp <= 0 ? "yellow" : "#00ffff", false);
-				}
-			}
-
-			//距离
-			if (app.checkboxList.isDis) {
-				drawText("[" + objectInfo.dis + "m]", objectInfo.x, objectInfo.y - 53, 10, "white", "right", true);
-			}
-
-			//信息
-			if (app.checkboxList.isInfo) {
-				const teamcolor = app.teamcolor[objectInfo.team];
-				//倒三角形 开始点，x,y 途径，x,y 终点，x,y
-				drawTriangle(objectInfo.x - 3, objectInfo.y - 12, objectInfo.x, objectInfo.y - 6, objectInfo.x + 3, objectInfo.y - 12, teamcolor, 0.5, true);
-				//队标背景
-				drawRectangle(objectInfo.x - 46, objectInfo.y - 29, 16, 14, teamcolor, 0.8, true);
-				//名字背景
-				drawRectangle(objectInfo.x - 30, objectInfo.y - 29, 75, 14, teamcolor, 0.5, true);
-				//队标文字
-				drawText(objectInfo.team, objectInfo.x - 38, objectInfo.y - 38, 10, "#FFF", "center", true);
-				//名字文字
-				if (objectInfo.name.length > 7) objectInfo.name = `${objectInfo.name.slice(0, 6)}...`
-				drawText(objectInfo.name, objectInfo.x + 8, objectInfo.y - 38, 10, "#FFF", "center", true);
-			}
-
-			//血量
-			if (app.checkboxList.isHP) {
-				//绘制圆角矩形，起点xy，矩形宽高，圆角半径，颜色，是否填充矩形
-				drawRoundRect(objectInfo.x - 46, objectInfo.y - 15, 91, 3, 0, "rgba(0,0,0,0.4)", true); //利用实心矩形填充
-				drawRoundRect(objectInfo.x - 46, objectInfo.y - 15, Math.ceil(objectInfo.hp / 1.1), 3, 0, objectInfo.hp <= 30 ? "rgba(255,0,0,0.8)" : "rgba(255,255,255,0.8)", true);
-			}
-
-			//手持贴图
-			if (app.tietu == '1') {
-				var pngY = "60";
-				if (app.checkboxList.isLine == false && app.checkboxList.isShouChi == false && app.checkboxList.isDis == false) pngY = "48";
-				//新贴图
-				//获取枪械图标
-				var img = new Image();
-				img.src = "Map/" + app.shouchi[objectInfo.weaponid] + ".png"
-				//绘制枪械图标
-				circleImgTwo(img, objectInfo.x - 28, objectInfo.y - pngY, 56, 16);
-
-			}
-
-			//手持
-			if (app.checkboxList.isShouChi) {
-				//贴图 
-				/*const shouchi2 = app.shouchi2[objectInfo.weaponid];
-				if (app.tietu == '1') {
-				drawImage(shouchi2, objectInfo.x - 22, objectInfo.y - 63, 44, 23, true);//(路径，路径，位置，宽高)
-				}*/
-				//文字
-				//drawText("[" + objectInfo.weaponid + "m]", objectInfo.x, objectInfo.y - 63, 10, "white", "right", true);		
-				const shouchi = app.shouchi[objectInfo.weaponid];
-				if (objectInfo.hp > 0) {
-					drawText("[" + shouchi + "]", objectInfo.x, objectInfo.y - 53, 10, "white", "left", true);
-				} else if (objectInfo.hp <= 0) {
-					drawText("[倒地]", objectInfo.x, objectInfo.y - 53, 10, "white", "left", true);
-				}
-			}
-		} else if (app.huizhi == '2') {
-			//方框
-			if (app.checkboxList.isBox) {
-				//方框风格
-				if (app.fangkuang == '1') {
-					//巡查2D方框
-					drawMyRect(objectInfo.x - objectInfo.w / 2, objectInfo.y, objectInfo.w, objectInfo.h, objectInfo.hp <= 0 ? "yellow" : "#00ffff", false);
-				} else if (app.fangkuang == '2') {
-					//动态3D方框 距离小于100米绘制3d框
-					if (objectInfo.dis <= 100) {
-						//上
-						drawLine(objectInfo.yqsx, objectInfo.yqsy, objectInfo.zqsx, objectInfo.zqsy, objectInfo.hp <= 0 ? "yellow" : "#28ff1d", app.xian);
-						drawLine(objectInfo.zqsx, objectInfo.zqsy, objectInfo.zhsx, objectInfo.zhsy, objectInfo.hp <= 0 ? "yellow" : "#28ff1d", app.xian);
-						drawLine(objectInfo.zhsx, objectInfo.zhsy, objectInfo.yhsx, objectInfo.yhsy, objectInfo.hp <= 0 ? "yellow" : "#28ff1d", app.xian);
-						drawLine(objectInfo.yhsx, objectInfo.yhsy, objectInfo.yqsx, objectInfo.yqsy, objectInfo.isAI ? "white" : "red", app.xian);
-						//下
-						drawLine(objectInfo.yqxx, objectInfo.yqxy, objectInfo.zqxx, objectInfo.zqxy, objectInfo.hp <= 0 ? "yellow" : "#28ff1d", app.xian);
-						drawLine(objectInfo.zqxx, objectInfo.zqxy, objectInfo.zhxx, objectInfo.zhxy, objectInfo.hp <= 0 ? "yellow" : "#28ff1d", app.xian);
-						drawLine(objectInfo.zhxx, objectInfo.zhxy, objectInfo.yhxx, objectInfo.yhxy, objectInfo.hp <= 0 ? "yellow" : "#28ff1d", app.xian);
-						drawLine(objectInfo.yhxx, objectInfo.yhxy, objectInfo.yqxx, objectInfo.yqxy, objectInfo.isAI ? "white" : "red", app.xian);
-						//从上到下
-						drawLine(objectInfo.zhsx, objectInfo.zhsy, objectInfo.zhxx, objectInfo.zhxy, objectInfo.hp <= 0 ? "yellow" : "#28ff1d", app.xian);
-						drawLine(objectInfo.yhsx, objectInfo.yhsy, objectInfo.yhxx, objectInfo.yhxy, objectInfo.isAI ? "white" : "red", app.xian);
-						drawLine(objectInfo.zqsx, objectInfo.zqsy, objectInfo.zqxx, objectInfo.zqxy, objectInfo.hp <= 0 ? "yellow" : "#28ff1d", app.xian);
-						drawLine(objectInfo.yqsx, objectInfo.yqsy, objectInfo.yqxx, objectInfo.yqxy, objectInfo.isAI ? "white" : "red", app.xian);
-						//大于100米绘制2d框
-					} else if (objectInfo.dis > 100) {
-						//drawMyRect(objectInfo.x - objectInfo.w / 2, objectInfo.y, objectInfo.w, objectInfo.h, objectInfo.hp <= 0 ? "yellow" : objectInfo.isAI ? "white" : "#00ffff", false);
-						drawRect(objectInfo.x - objectInfo.w / 2, objectInfo.y, objectInfo.w, objectInfo.h, objectInfo.hp <= 0 ? "yellow" : objectInfo.isAI ? "white" : "#28ff1d", false, app.xian);
-					}
-				}
-			}
-
-			//骨骼
-			if (app.checkboxList.isBone) {
-				if (objectInfo.dis <= app.gugefw) {
-					//动态全骨
-					if (app.guge == 'qg') {
-						//drawCircular(objectInfo.bonetoux, objectInfo.bonetouy - 1, 100, objectInfo.w/9, 'yellow', false);
-						drawLine(objectInfo.bonetoux, objectInfo.bonetouy, objectInfo.bonebzx, objectInfo.bonebzy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonebzx, objectInfo.bonebzy, objectInfo.bonezjx, objectInfo.bonezjy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonebzx, objectInfo.bonebzy, objectInfo.boneyjx, objectInfo.boneyjy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonezjx, objectInfo.bonezjy, objectInfo.bonezzx, objectInfo.bonezzy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.boneyjx, objectInfo.boneyjy, objectInfo.boneyzx, objectInfo.boneyzy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonezzx, objectInfo.bonezzy, objectInfo.bonezsx, objectInfo.bonezsy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.boneyzx, objectInfo.boneyzy, objectInfo.boneysx, objectInfo.boneysy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonebzx, objectInfo.bonebzy, objectInfo.bonepgx, objectInfo.bonepgy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonepgx, objectInfo.bonepgy, objectInfo.bonezxx, objectInfo.bonezxy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonezxx, objectInfo.bonezxy, objectInfo.bonezjox, objectInfo.bonezjoy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonepgx, objectInfo.bonepgy, objectInfo.boneyxx, objectInfo.boneyxy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.boneyxx, objectInfo.boneyxy, objectInfo.boneyjox, objectInfo.boneyjoy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						//动态半骨
-					} else if (app.guge == 'bg') {
-						drawLine(objectInfo.bonepgx, objectInfo.bonepgy, objectInfo.bonezxx, objectInfo.bonezxy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonezxx, objectInfo.bonezxy, objectInfo.bonezjox, objectInfo.bonezjoy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.bonepgx, objectInfo.bonepgy, objectInfo.boneyxx, objectInfo.boneyxy, objectInfo.isAI ? "white" : "yellow", app.xian);
-						drawLine(objectInfo.boneyxx, objectInfo.boneyxy, objectInfo.boneyjox, objectInfo.boneyjoy, objectInfo.isAI ? "white" : "yellow", app.xian);
-					}
-				} else if (objectInfo.dis > app.gugefw) {
-					//巡查2D方框
-					drawMyRect(objectInfo.x - objectInfo.w / 2, objectInfo.y, objectInfo.w, objectInfo.h, objectInfo.hp <= 0 ? "yellow" : "#00ffff", false);
-				}
-			}
-
-			//距离
-			if (app.checkboxList.isDis) {
-				drawText(objectInfo.dis, objectInfo.x, objectInfo.y - 47, 10, "#FFF", "center", true);
-			}
-
-			//信息
-			if (app.checkboxList.isInfo) {
-				//队标 名字
-				//if (objectInfo.name.length > 7) objectInfo.name = `${objectInfo.name.slice(0, 6)}...`
-				drawText(objectInfo.team + " " + objectInfo.name, objectInfo.x, objectInfo.y - 28, 10, "yellow", "center", true);
-			}
-
-			// 血条
-			if (app.checkboxList.isHP) {
-				drawCircular(objectInfo.x, objectInfo.y - 31, Math.ceil(objectInfo.hp), 11, objectInfo.hp <= 30 ? "red" : "#28ff1d", 5, false);
-			}
-		}
-	}
-
-	// ********************* 绘图相关 *********************
-
-	//清空画布
-	function clearCtx() {
-		ctx.clearRect(0, 0, canvasDom.width, canvasDom.height);
-	}
-
-	//设置线宽
-	function setLineWidth(w) {
-		ctx.lineWidth = w;
-	}
-
-	//绘制图片测试
-	function circleImgTwo(img, x, y, w, h) {
-		x *= iosScale;
-		y *= iosScale;
-		w *= iosScale;
-		h *= iosScale;
-		ctx.globalAlpha = 0.8;
-		ctx.drawImage(img, x, y, w, h);
-	}
-
-	//绘制圆形带箭头 中心点xy,半径, 箭头旋转角度, 圆形颜色，箭头颜色（雷达点朝向）
-	function drawCMark(x, y, radius, angle, cColor, dColor) {
-		x *= iosScale;
-		y *= iosScale;
-		radius *= iosScale;
-
-		var startAngle = (Math.PI / 180) * (-30 + angle);
-		var endAngle = (Math.PI / 180) * (30 + angle);
-
-		//圆形
-		ctx.beginPath();
-		ctx.fillStyle = cColor;
-		ctx.arc(x, y, radius, 0, 360, false);
-		ctx.fill();
-		ctx.closePath();
-
-		//箭头
-		ctx.beginPath();
-		ctx.fillStyle = dColor;
-		ctx.arc(x, y, radius + radius * 0.15, startAngle, endAngle, false);
-
-		var rx = x + (x + radius * 1.7 - x) * Math.cos(angle * Math.PI / 180) - (y - y) * Math.sin(angle * Math.PI / 180);
-		var ry = y + (x + radius * 1.7 - x) * Math.sin(angle * Math.PI / 180) + (y - y) * Math.cos(angle * Math.PI / 180);
-
-		ctx.lineTo(rx, ry);
-		ctx.fill();
-		ctx.closePath();
-	}
-
-	//绘制三角形，起始点xy，终点xy，颜色，透明度，是否填充
-	function drawTriangle(x1, y1, x2, y2, x3, y3, color, globalAlpha, isFill = true) {
-		x1 *= iosScale;
-		y1 *= iosScale;
-		x2 *= iosScale;
-		y2 *= iosScale;
-		x3 *= iosScale;
-		y3 *= iosScale;
-
-		//三角形
-		ctx.beginPath(); //开始绘制
-		ctx.strokeStyle = color;
-		ctx.fillStyle = color;
-		ctx.globalAlpha = globalAlpha;
-		ctx.moveTo(x1, y1);//开始点，设置x,y
-		ctx.lineTo(x2, y2);//途经点，设置x,y
-		ctx.lineTo(x3, y3);//最终点，设置x,y
-		ctx.closePath(); //闭合路径
-		if (isFill) {
-			ctx.fill(); //绘制实心
-		} else {
-			ctx.stroke(); //绘制空心
-		}
-	}
-
-	//绘制对角矩形 起点xy，矩形宽高，颜色，是否填充（对角方框）
-	function drawMyRect(x, y, w, h, color, isFill = true) {
-		x *= iosScale;
-		y *= iosScale;
-		w *= iosScale;
-		h *= iosScale;
-
-		ctx.strokeStyle = color;
-		ctx.lineWidth = app.xian;
-
-		ctx.beginPath();
-
-		ctx.moveTo(x, y);
-		ctx.lineTo(Number(x) + Number(w) / 6, y);
-		ctx.closePath();
-
-		ctx.moveTo(x, y);
-		ctx.lineTo(x, Number(y) + Number(h / 6));
-		ctx.closePath();
-
-		ctx.moveTo(Number(x) + Number(w) - Number(w) / 6, y);
-		ctx.lineTo(Number(x) + Number(w), y);
-		ctx.closePath();
-
-		ctx.moveTo(Number(x) + Number(w), y);
-		ctx.lineTo(Number(x) + Number(w), Number(y) + Number(h / 6));
-		ctx.closePath();
-
-		ctx.moveTo(Number(x), Number(y) + Number(h));
-		ctx.lineTo(Number(x), Number(y) + Number(h) - Number(h / 6));
-		ctx.closePath();
-
-		ctx.moveTo(Number(x), Number(y) + Number(h));
-		ctx.lineTo(Number(x) + Number(w) / 6, Number(y) + Number(h));
-
-		ctx.moveTo(Number(x) + Number(w), Number(y) + Number(h));
-		ctx.lineTo(Number(x) + Number(w) - (w / 6), Number(y) + Number(h));
-
-		ctx.moveTo(Number(x) + Number(w), Number(y) + Number(h));
-		ctx.lineTo(Number(x) + Number(w), Number(y) + Number(h) - Number(h / 6));
-		ctx.closePath();
-		ctx.stroke();
-	}
-
-	//绘制图片 图片内容，起点xy，图片宽高（手持贴图）
-	function drawImage(png, x, y, w, h) {
-		x *= iosScale;
-		y *= iosScale;
-		w *= iosScale;
-		h *= iosScale;
-
-		ctx.beginPath();
-		var img = new Image();
-		img.src = png;
-		//图片加载完成后
-		img.onload = function () {
-			ctx.drawImage(img, x, y, w, h);
-		}
-		ctx.closePath();
-	}
-
-	//绘制矩形 起点xy，矩形宽高，颜色，透明度，是否填充矩形（队标、名字背景）
-	function drawRectangle(x, y, w, h, color, transparency, isFill = true) {
-		x *= iosScale;
-		y *= iosScale;
-		w *= iosScale;
-		h *= iosScale;
-
-		ctx.beginPath();
-		ctx.fillStyle = color;
-		ctx.globalAlpha = transparency;
-		ctx.fillRect(x, y, w, h,);
-		ctx.closePath();
-	}
-
-	//绘制线条，起始点xy，终点xy，颜色（雷达线条、射线、3D框线条）
-	function drawLine(x1, y1, x2, y2, color, lineWidth) {
-		x1 *= iosScale;
-		y1 *= iosScale;
-		x2 *= iosScale;
-		y2 *= iosScale;
-
-		ctx.beginPath();
-		ctx.lineWidth = lineWidth;
-		ctx.fillStyle = color;
-		ctx.strokeStyle = color;
-		ctx.moveTo(x1, y1);
-		ctx.lineTo(x2, y2);
-		ctx.stroke();
-		ctx.closePath();
-	}
-
-	//绘制圆形 起点xy，圆形弧度，大小，颜色，线宽，是否填充（简洁风格血条、雷达、背敌）
-	function drawCircular(x, y, num, size, color, lineWidth, isFill = true) {
-		x *= iosScale;
-		y *= iosScale;
-		size *= iosScale;
-
-		if (num === 100) num = 1;
-		else if (num > 0) num = 1 - num / 100;
-		const d2a = n => n * Math.PI / 180;
-
-		ctx.beginPath();
-		ctx.lineWidth = lineWidth;
-		ctx.arc(x, y, size, d2a(num * 360 - 90), d2a(-90), false);
-		if (isFill) {
-			ctx.fillStyle = color;
-			ctx.fill();
-		} else {
-			ctx.strokeStyle = color;
-			ctx.stroke();
-		}
-		ctx.closePath();
-	}
-
-	//绘制矩形 起点xy，矩形宽高，颜色，是否填充矩形 (方框)
-	function drawRect(x, y, w, h, color, isFill = true) {
-		x *= iosScale;
-		y *= iosScale;
-		w *= iosScale;
-		h *= iosScale;
-
-		ctx.beginPath();
-		ctx.lineWidth = app.xian;
-		ctx.strokeStyle = color;
-		ctx.fillStyle = color;
-		ctx.globalAlpha = 1;
-		if (isFill) {
-			ctx.fillRect(x, y, w, h);
-		} else {
-			ctx.strokeRect(x, y, w, h);
-		}
-		ctx.closePath();
-	}
-
-	//绘制圆角矩形，起点xy，矩形宽高，圆角半径，颜色，是否填充矩形
-	function drawRoundRect(x, y, w, h, r, color, isFill = true) {
-		x *= iosScale;
-		y *= iosScale;
-		w *= iosScale;
-		h *= iosScale;
-		r *= iosScale;
-
-		ctx.beginPath();
-		ctx.strokeStyle = color;
-		ctx.fillStyle = color;
-		ctx.globalAlpha = 1;
-		if (w < 2 * r) r = w / 2;
-		if (h < 2 * r) r = h / 2;
-		ctx.beginPath();
-		ctx.moveTo(x + r, y);
-		ctx.arcTo(x + w, y, x + w, y + h, r);
-		ctx.arcTo(x + w, y + h, x, y + h, r);
-		ctx.arcTo(x, y + h, x, y, r);
-		ctx.arcTo(x, y, x + w, y, r);
-		if (isFill) {
-			ctx.fill();
-		} else {
-			ctx.stroke();
-		}
-		ctx.closePath();
-	}
-
-	//绘制文字，文字内容，起点xy，文字大小，文字对齐，颜色，是否填充文字
-	function drawText(text, x, y, size, color, textAlign, isFill = true) {
-		x *= iosScale;
-		y *= iosScale;
-		size *= iosScale;
-
-		ctx.beginPath();
-		ctx.globalAlpha = 1; //透明度
-		ctx.textAlign = textAlign; //文字对齐
-		ctx.fillStyle = color;
-		ctx.strokeStyle = color;
-		ctx.font = size + 'px' + fontFamily;
-		if (isFill) {
-			ctx.fillText(text, x, y + size);
-		} else {
-			ctx.strokeText(text, x, y + size);
-		}
-		ctx.closePath();
-	};
-
-	// ********************* 内存相关 *********************
-	function readInt(addr) {
-		return Number(h5gg.getValue(addr, "I32"));
-	}
-
-	function readLong(addr) {
-		return Number(h5gg.getValue(addr, "I64"));
-	}
-
-	function readFloat(addr) {
-		return Number(h5gg.getValue(addr, "F32"));
-	}
-
-	function isNull(addr) {
-		return (addr < 0x100000000 || addr > 0x300000000);
-	}
-
-	// ********************* UE4相关 *********************
-	function RotatorToMatrix(rotation) {
-		var radPitch = rotation.Pitch * (Math.PI / 180.0);
-		var radYaw = rotation.Yaw * (Math.PI / 180.0);
-		var radRoll = rotation.Roll * (Math.PI / 180.0);
-
-		var SP = Math.sin(radPitch);
-		var CP = Math.cos(radPitch);
-		var SY = Math.sin(radYaw);
-		var CY = Math.cos(radYaw);
-		var SR = Math.sin(radRoll);
-		var CR = Math.cos(radRoll);
-
-		var matrix = new Array(16).fill(0);
-
-		matrix[0] = (CP * CY);
-		matrix[1] = (CP * SY);
-		matrix[2] = (SP);
-		matrix[3] = 0;
-
-		matrix[4] = (SR * SP * CY - CR * SY);
-		matrix[5] = (SR * SP * SY + CR * CY);
-		matrix[6] = (-SR * CP);
-		matrix[7] = 0;
-
-		matrix[8] = (-(CR * SP * CY + SR * SY));
-		matrix[9] = (CY * SR - CR * SP * SY);
-		matrix[10] = (CR * CP);
-		matrix[11] = 0;
-
-		matrix[12] = 0;
-		matrix[13] = 0;
-		matrix[14] = 0;
-		matrix[15] = 1;
-
-		return matrix;
-	}
-
-	function vectorDot(lhs, rhs) {
-		return (((lhs.X * rhs.X) + (lhs.Y * rhs.Y)) + (lhs.Z * rhs.Z));
-	}
-
-	function world2Screen(worldLocation, camViewInfo, tempMatrix) {
-		// var tempMatrix = RotatorToMatrix(camViewInfo.Rotation);
-
-		var vAxisX = {
-			X: tempMatrix[0],
-			Y: tempMatrix[1],
-			Z: tempMatrix[2]
-		};
-
-		var vAxisY = {
-			X: tempMatrix[4],
-			Y: tempMatrix[5],
-			Z: tempMatrix[6]
-		};
-
-		var vAxisZ = {
-			X: tempMatrix[8],
-			Y: tempMatrix[9],
-			Z: tempMatrix[10]
-		};
-
-		var vDelta = {
-			X: worldLocation.X - camViewInfo.Location.X,
-			Y: worldLocation.Y - camViewInfo.Location.Y,
-			Z: worldLocation.Z - camViewInfo.Location.Z
-		};
-
-		var vTransformed = {
-			X: vectorDot(vDelta, vAxisY),
-			Y: vectorDot(vDelta, vAxisZ),
-			Z: vectorDot(vDelta, vAxisX)
-		};
-
-		if (vTransformed.Z < 1.0) {
-			vTransformed.Z = 1.0;
-		}
-
-		var fov = camViewInfo.FOV;
-		var screenCenterX = (sWidth / 2.0);
-		var screenCenterY = (sHeight / 2.0);
-
-		var re = {
-			X: (screenCenterX + vTransformed.X * (screenCenterX / Math.tan(fov * (Math.PI / 360.0))) / vTransformed.Z),
-			Y: (screenCenterY - vTransformed.Y * (screenCenterX / Math.tan(fov * (Math.PI / 360.0))) / vTransformed.Z)
-		};
-
-		return re;
-	};
-
-	/***************骨骼函数*******************/
-	function getBoneWorldPos(boneTransAddr, c2wMatrix) {
-		var boneTrans = {
-			Rotation: {
-				x: readFloat(boneTransAddr),
-				y: readFloat(boneTransAddr + 4),
-				z: readFloat(boneTransAddr + 8),
-				w: readFloat(boneTransAddr + 12),
-			},
-			Translation: {
-				X: readFloat(boneTransAddr + 16),
-				Y: readFloat(boneTransAddr + 20),
-				Z: readFloat(boneTransAddr + 24),
-				W: readFloat(boneTransAddr + 28),
-			},
-			Scale3D: {
-				X: readFloat(boneTransAddr + 32),
-				Y: readFloat(boneTransAddr + 36),
-				Z: readFloat(boneTransAddr + 40),
-			},
-		}
-		var boneMatrix = TransformToMatrix(boneTrans);
-		return MatrixToVector(MatrixMulti(boneMatrix, c2wMatrix));
-	}
-
-	function MatrixToVector(matrix) {
-		var Vector3 = {
-			X: matrix[3][0],
-			Y: matrix[3][1],
-			Z: matrix[3][2]
-		}
-		return Vector3;
-	}
-
-	function MatrixMulti(m1, m2) {
-		var matrix = createArrTwo(4, 4, 0);
-		for (var i = 0; i < 4; i++) {
-			for (var j = 0; j < 4; j++) {
-				for (var k = 0; k < 4; k++) {
-					matrix[i][j] += m1[i][k] * m2[k][j];
-				}
-			}
-		}
-		return matrix;
-	}
-
-	function TransformToMatrix(transform) {
-		var matrix = createArrTwo(4, 4, 0);
-
-		matrix[3][0] = transform.Translation.X;
-		matrix[3][1] = transform.Translation.Y;
-		matrix[3][2] = transform.Translation.Z;
-
-		var x2 = transform.Rotation.x + transform.Rotation.x;
-		var y2 = transform.Rotation.y + transform.Rotation.y;
-		var z2 = transform.Rotation.z + transform.Rotation.z;
-
-		var xx2 = transform.Rotation.x * x2;
-		var yy2 = transform.Rotation.y * y2;
-		var zz2 = transform.Rotation.z * z2;
-
-		matrix[0][0] = (1.0 - (yy2 + zz2)) * transform.Scale3D.X;
-		matrix[1][1] = (1.0 - (xx2 + zz2)) * transform.Scale3D.Y;
-		matrix[2][2] = (1.0 - (xx2 + yy2)) * transform.Scale3D.Z;
-
-		var yz2 = transform.Rotation.y * z2;
-		var wx2 = transform.Rotation.w * x2;
-		matrix[2][1] = (yz2 - wx2) * transform.Scale3D.Z;
-		matrix[1][2] = (yz2 + wx2) * transform.Scale3D.Y;
-
-		var xy2 = transform.Rotation.x * y2;
-		var wz2 = transform.Rotation.w * z2;
-		matrix[1][0] = (xy2 - wz2) * transform.Scale3D.Y;
-		matrix[0][1] = (xy2 + wz2) * transform.Scale3D.X;
-
-		var xz2 = transform.Rotation.x * z2;
-		var wy2 = transform.Rotation.w * y2;
-		matrix[2][0] = (xz2 + wy2) * transform.Scale3D.Z;
-		matrix[0][2] = (xz2 - wy2) * transform.Scale3D.X;
-
-		matrix[0][3] = 0;
-		matrix[1][3] = 0;
-		matrix[2][3] = 0;
-		matrix[3][3] = 1;
-
-		return matrix;
-	}
-
-	function createArrTwo(num1, num2, data) {
-		let arr = new Array(num1)
-		for (let i = 0; i < num1; ++i) {
-			arr[i] = new Array(num2)
-			for (let x = 0; x < num2; ++x) {
-				arr[i][x] = data
-			}
-		}
-		return arr
-	}
-	/***************骨骼函数*******************/
-
-	cacheTimer = setInterval(function () {
-		drawCache();
-	}, 1000); //一秒缓存一次
-
-	drawTimer = setInterval(function () {
-		if (app.checkboxList.isDraw == '1') {
-			console.log("1");
-			shadowDraw();
-
-			//计算FPS
-			if (!window.fpscount) window.fpscount = 0;
-			if (!window.fpstime) window.fpstime = performance.now();
-			window.fpscount++;
-			if ((performance.now() - window.fpstime) > 2000) {
-				window.fps = window.fpscount;
-				window.fpstime = performance.now();
-				window.fpscount = 0;
-			}
-			ctx.textBaseline = "top";
-			ctx.textAlign = "center";
-			ctx.font = '40px "Arial, sans-serif"';
-			ctx.fillStyle = "aqua";
-
-			if (window.fps) ctx.fillText("FPS: " + window.fps, 150, 50);
-		} else {
-			clearCtx();
-		}
-	}, app.fps);
-</script>
-<script>//BS添加
-	//BSPHP服务器地址,在BSPHP后台软件>软件配置
-    const G_BSPHP_URL = "http://124.223.167.6:5588/AppEn.php?appid=98741236&m=7961de316da6303410c27ccca09e21c1";//BS添加
-
-	//通信密钥Key
-    const G_BSPHP_KEY = "7f3eef9d996b198770b3fb0c73ebe8ee";//BS添加
-
-
-	const Base64 = {//BS添加
-		encode: (str) => {//BS添加
-			return window.btoa(unescape(encodeURIComponent(str)))//BS添加
-		},//BS添加
-		decode: (str) => {//BS添加
-			return decodeURIComponent(escape(window.atob(str)))//BS添加
-		}//BS添加
-	}//BS添加
-
-	function bin2hex(s) {//BS添加
-		var i, l, o = '',//BS添加
-			n;//BS添加
-
-		s += '';//BS添加
-
-		for (i = 0, l = s.length; i < l; i++) {//BS添加
-			n = s.charCodeAt(i)//BS添加
-				.toString(16);//BS添加
-			o += n.length < 2 ? '0' + n : n;//BS添加
-		}//BS添加
-
-		return o;//BS添加
-	}//BS添加  下边都是
-
-	function getUUID() {
-       var canvas = document.createElement('canvas');
-       var ctx = canvas.getContext("2d");
-       var txt = "shadowUUID";
-       ctx.textBaseline = "bottom";
-       ctx.font = "16px 'Arial'";
-       ctx.textBaseline = "shadow";
-       ctx.fillStyle = "#FFF";
-       ctx.fillRect(125, 1, 62, 20);
-       ctx.fillStyle = "#FFF";
-       ctx.fillText(txt, 2, 15);
-       ctx.fillStyle = "rgba(255, 1, 0, 0.7)";
-       ctx.fillText(txt, 4, 17);
-   
-       var b64 = canvas.toDataURL().replace("data:image/png;base64,", "");
-       var bin = atob(b64);
-       var crc = bin2hex(bin.slice(-20, -12));
-       return crc;
-   }
-
-	function GetGlobalParameter() {
-		var gArray = {
-			"BSphpSeSsL": getUUID(),
-			"date": Date.parse(new Date()) / 1000,
-			"md5": "",
-			"mutualkey": G_BSPHP_KEY //通信密钥Key
-		};
-
-		return gArray;
-	}
-
-	function obj2Url(param, key, encode) {
-		if (param == null) return '';
-		var paramStr = '';
-		var t = typeof (param);
-		if (t == 'string' || t == 'number' || t == 'boolean') {
-			paramStr += '&' + key + '=' + ((encode == null || encode) ? encodeURIComponent(param) : param);
-		} else {
-			for (var i in param) {
-				var k = key == null ? i : key + (param instanceof Array ? '[' + i + ']' : '.' + i);
-				paramStr += obj2Url(param[i], k, encode);
-			}
-		}
-		return paramStr;
-	}
-
-	function bsphpPost(param) {
-		param = obj2Url(param);
-		param = "parameter=" + Base64.encode(param);
-		var jqdata = $.ajax({
-			url: G_BSPHP_URL,
-			type: "POST",
-			data: param,
-			async: false
-		});
-		if (jqdata.status === 200) {
-			return Base64.decode(jqdata.responseText);
-		}
-		return jqdata.statusText;
-	}
-
-	//全局UUID，直接使用
-	const UUID = getUUID();
-
-	const BSPHP = {
-		//软件版本信息，查看https://www.bsphp.com/chm-13.html
-		v: () => {
-			var p = GetGlobalParameter();
-			p.api = "v.in";
-			return bsphpPost(p);
-		},
-		//公告，查看https://www.bsphp.com/chm-14.html
-		gg: () => {
-			var p = GetGlobalParameter();
-			p.api = "gg.in";
-			return bsphpPost(p);
-		},
-		//登录，查看https://www.bsphp.com/chm-45.html
-		login: (card) => {
-			var p = GetGlobalParameter();
-			p.api = "login.ic";
-			p.icid = card;
-			p.key = UUID;
-			p.maxoror = UUID;
-			return bsphpPost(p);
-		},
-		//获取登录状态，查看https://www.bsphp.com/chm-54.html
-		getlkinfo: () => {
-			var p = GetGlobalParameter();
-			p.api = "getlkinfo.ic";
-			return bsphpPost(p);
-		},
-		//获取用户信息,查看https://www.bsphp.com/chm-50.html
-		getinfo: (info) => {
-			var p = GetGlobalParameter();//上边都是添加BS添加
-			p.api = "getinfo.ic";//BS添加
-			p.info = info;//BS添加
-			return bsphpPost(p);//BS添加
-		},//BS添加
-	}//BS添加
-</script>  <!-- BS添加命令 -->  
-
+        
+        function getUUID() {
+            var udid = localStorage.getItem("udid");
+            if (udid) {
+                return udid;
+            } else {
+                var randomUUID = Math.floor(Math.random() * 1000000000000000);
+                localStorage.setItem("udid", randomUUID);
+                return randomUUID;
+            }
+        }
+        
+        
+        function GetGlobalParameter() {
+            var gArray = {
+                "BSphpSeSsL": getUUID(),
+                "date": Date.parse(new Date()) / 1000,
+                "md5": "",
+                "mutualkey": G_BSPHP_KEY //通信密钥Key
+            };
+            return gArray;
+        }
+        
+        function obj2Url(param, key, encode) {
+            if (param == null) return '';
+            var paramStr = '';
+            var t = typeof (param);
+            if (t == 'string' || t == 'number' || t == 'boolean') {
+                paramStr += '&' + key + '=' + ((encode == null || encode) ? encodeURIComponent(param) : param);
+            } else {
+                for (var i in param) {
+                    var k = key == null ? i : key + (param instanceof Array ? '[' + i + ']' : '.' + i);
+                    paramStr += obj2Url(param[i], k, encode);
+                }
+            }
+            return paramStr;
+        }
+        
+        function bsphpPost(param) {
+            param = obj2Url(param);
+            param = "parameter=" + Base64.encode(param);
+            var jqdata = $.ajax({
+                url: G_BSPHP_URL,
+                type: "POST",
+                data: param,
+                async: false
+            });
+            if (jqdata.status === 200) {
+                return Base64.decode(jqdata.responseText);
+            }
+            return jqdata.statusText;
+        }
+        
+        function bsphplogin(param) {
+            param = obj2Url(param);
+            param = "parameter=" + Base64.encode(param);
+            var jqdata = $.ajax({
+                url: G_BSPHP_URL,
+                type: "POST",
+                data: param,
+                async: false
+            });
+            if (jqdata.status === 200) {
+                var responseText = Base64.decode(jqdata.responseText);
+                var dataArray = responseText.split("|");
+                if (dataArray[1] === "1081") {
+                    // 进行下一步操作
+                    var responseText = `到期日期: ${dataArray[4]}`;
+                    localStorage.setItem("card", $("#card").val());
+                    document.querySelector(".baiyunyz").style.display = "none";
+                    document.querySelector(".popup_container").style.display = "block";
+                    
+                }
+                return responseText;
+            }
+            return jqdata.statusText;
+        }
+        
+        
+        //全局UUID，直接使用
+        const UUID = getUUID();
+        
+        const BSPHP = {
+            //软件版本信息，查看https://www.bsphp.com/chm-13.html
+            v: () => {
+                var p = GetGlobalParameter();
+                p.api = "v.in";
+                return bsphpPost(p);
+            },
+            //公告，查看https://www.bsphp.com/chm-14.html
+            gg: () => {
+                var p = GetGlobalParameter();
+                p.api = "gg.in";
+                return bsphpPost(p);
+            },
+            //登录，查看https://www.bsphp.com/chm-45.html
+            login: (card) => {
+                var p = GetGlobalParameter();
+                p.api = "login.ic";
+                p.icid = card;
+                p.key = UUID;
+                p.maxoror = UUID;
+                return bsphplogin(p);
+            },
+            //获取登录状态，查看https://www.bsphp.com/chm-54.html
+            getlkinfo: () => {
+                var p = GetGlobalParameter();
+                p.api = "getlkinfo.ic";
+                return bsphpPost(p);
+            },
+            //获取用户信息,查看https://www.bsphp.com/chm-50.html
+            getinfo: (info) => {
+                var p = GetGlobalParameter();
+                p.api = "getinfo.ic";
+                p.info = info;
+                return bsphpPost(p);
+            },
+        }
+    </script>
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>ayDraw</title>
+                <script>
+                    setButtonImage('https://q.qlogo.cn/g?b=qq&nk=2412716971&s=100');
+                </script>
+                <style>
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        color: #000;
+                        font-size: 12px;
+                        font-family: Arial, sans-serif;
+                        -webkit-tap-highlight-color: transparent;
+                        outline: none;
+                    }
+                    
+                    body {
+                        background: transparent;
+                        position: fixed;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+                    }
+                    
+                    
+                    *:not(input, checkbox, textarea) {
+                        
+                        -webkit-touch-callout: none;
+                        -webkit-user-select: none;
+                        user-select: none;
+                        
+                    }
+                    
+                    .popup_container {
+                        display: none;/* 验证后启动 */
+                        position: absolute;
+                        z-index: 1000;
+                        left: 50%;
+                        top: 40%;
+                    }
+                    
+                    #H5AlertView {
+                        width: 620px;
+                        height: 200px;
+                        position: absolute;
+                        left: -310px;
+                        top: 0px; //居上
+                        text-align: center;
+                        zoom: 0.8;
+                    }
+                    #time-display {
+                        width: 100%;
+                        text-align: center;
+                        padding-top: 0px;
+                        font-size: 15px;/* 控制字体打戏哦啊 */
+                        font-weight:600;/* 控制字体粗细 */
+                        color: yellow; /* 将标题和信息文本颜色更改为黄色 */
+                    }
+
+                    #title-text {
+                        width: 100%;
+                        text-align: center;
+                        padding-top: 0px;
+                        font-size: 23px;
+                        font-weight:600;
+                        color: yellow; /* 将标题和信息文本颜色更改为黄色 */
+                    }
+                    
+                    #info-text {
+                        padding: 10px;
+                        color: #FF0000;
+                    }
+                    
+                    #content-view {
+                        flex-wrap: wrap;
+                        justify-content: space-around; /* 这将在按钮之间添加一些空间 */
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        z-index: 0;
+                        background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+                        position: relative;
+                        top: 0px;
+                        border: 2px solid yellow;  /* 2px宽，实线，黄色边框 */
+                        border-radius: 16px;
+                        padding: 10px;
+                    }
+                    
+                    button {
+                        width: 30%; /* 设置宽度以适应每行三个按钮 */
+                        height: 40px; /* 或您想要的任何高度 */
+                        color: yellow; /* 文字颜色改为黄色 */
+                        background-color: rgba(255, 255, 255, 0.5); /* 白色半透明背景 */
+                        border: none; /* 移除边框 */
+                        border-radius: 5px; /* 或者您想要的任何边框半径 */
+                        font-size: 12px; /* 或者您想要的任何字体大小 */
+                        margin: 5px; /* 添加一些边距 */
+                    }
+                    
+                    button:active {
+                        background-color: #005f5f; /* 更改按下按钮时的背景颜色 */
+                        transform: translateY(2px);
+                    }
+                    
+                </style>
+    </head>
+    
+    <body>
+        <!--悬浮菜单-->
+        <div class="popup_container">
+            <div id="H5AlertView">
+                <script>
+                    function draw(fps) {
+                        window.draw_state = 1;
+                    }
+                    
+                    function unDraw() {
+                        clearCtx();
+                        window.draw_state = 0;
+                        setTimeout(function(){
+                        },100);
+                    }
+                    
+                    
+                    function hideMenu() {
+                        var menu = document.querySelector("#H5AlertView");
+                        menu.style.display = 'none';
+                        
+                        setWindowTouch(false);
+                    }
+                    
+                </script>
+                <div id="content-view">
+                    <div id="title-text">猫咪</div>
+                    <div id="buttons-container">
+                        <button onclick="cx()">超限孙悟空</button>
+                        <button onclick="ljc()">漂移弹射(垃圾车)</button>
+                        <button onclick="hc()">漂移弹射(好车)</button>
+                        <button onclick="zdjq()">自动集气</button>
+                        <button onclick="wxxp()">无限小喷</button>
+                        <button onclick="wxxp()">无限小喷</button>
+                        <button onclick="cq()">穿墙</button>
+                        <button onclick="cxln()">超限雷诺</button>
+                    </div>
+                    <div id="time-display"></div>
+                </div>
+                
+            </div>
+        </div>
+        <script>
+                function updateBeijingTime() {
+                    const now = new Date();
+                    const options = { timeZone: 'Asia/Shanghai', year: 'numeric',month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+                    const formattedTime = new Intl.DateTimeFormat('zh-CN', options).format(now);
+                    document.getElementById('time-display').innerText = '北京时间: ' + formattedTime;
+                }
+
+                // 初始化时间显示
+                updateBeijingTime();
+
+                // 每秒更新时间
+                setInterval(updateBeijingTime, 1000);
+
+                function draw(fps) {
+                    window.draw_state = 1;
+                }
+                
+                function unDraw() {
+                    clearCtx();
+                    window.draw_state = 0;
+                    setTimeout(function(){
+                    },100);
+                }
+                
+                
+                function hideMenu() {
+                    var menu = document.querySelector("#H5AlertView");
+                    menu.style.display = 'none';
+                    
+                    setWindowTouch(false);
+                }
+            </script>
+    </body>
+    
 </html>

@@ -122,8 +122,8 @@
     </script>
     
     <script>
-        const G_BSPHP_URL = "http://124.223.167.6:5588/AppEn.php?appid=98741236&m=7961de316da6303410c27ccca09e21c1";
-        const G_BSPHP_KEY = "7f3eef9d996b198770b3fb0c73ebe8ee";
+        const G_BSPHP_URL = "https://vip.diyiart.cn/AppEn.php?appid=56565&m=4edb92f23f99626f3b40cde227671e15";
+        const G_BSPHP_KEY = "54363f4018b7b7e84ae9f927a3759941";
         const Base64 = {
             encode: (str) => {
                 return window.btoa(unescape(encodeURIComponent(str)));
@@ -451,5 +451,312 @@
                 }
             </script>
     </body>
-    
+    <script>
+        
+        document.body.addEventListener('touchstart', function () {});
+        
+        setWindowDrag(0, 0, 0, 0);
+        
+        var iosScale = window.devicePixelRatio;
+        var sWidth = 0;
+        var sHeight = 0;
+        
+        var canvasDom = document.createElement("canvas");
+        document.body.appendChild(canvasDom);
+        canvasDom.style.height = "100%";
+        canvasDom.style.width = "100%";
+        
+        var layout = function()
+        {
+            
+            if(window.lastorientation==window.orientation) return;
+            window.lastorientation=window.orientation;
+            
+            if(Math.abs(window.orientation)==90) {
+                setWindowRect(0,0,window.screen.height,window.screen.width);
+                canvasDom.width = window.screen.height * iosScale;
+                canvasDom.height = window.screen.width * iosScale;
+                sWidth = window.screen.height;
+                sHeight = window.screen.width;
+            } else {
+                setWindowRect(0,0,window.screen.width,window.screen.height);
+                canvasDom.height = window.screen.height * iosScale;
+                canvasDom.width = window.screen.width * iosScale;
+                sWidth = window.screen.width;
+                sHeight = window.screen.height;
+            }
+        }
+        
+        layout();
+        window.addEventListener("orientationchange", layout, false);
+        
+        setButtonAction(function(){
+            
+            var menu = document.querySelector("#H5AlertView");
+            if(menu.style.display=='none') {
+                menu.style.display='block';
+                setWindowTouch(true);
+            } else {
+                menu.style.display='none';
+                setWindowTouch(false);
+            }
+        });
+        
+        
+        
+        
+        
+        function cx()
+        {
+            
+            h5gg.clearResults();
+            h5gg.searchNumber('101','I32','0x10000000', '0x300000000');
+            h5gg.searchNearby('306', 'I32', '0x4');
+            h5gg.searchNearby('97', 'I32', '0x80');
+            h5gg.searchNumber('97','I32','0x10000000', '0x300000000');
+            alert('修改' + h5gg.getResultsCount() + '条');
+            var count = h5gg.getResultsCount();
+            var r = h5gg.getResults(count);
+            for (var i = 0; i < count; i++) {
+                var addr1 = r[i].address;
+                var weishu = /0$/;
+                var pd = weishu.test(addr1);
+                if (pd) {
+                    var addr2 = Number(addr1) + +4;
+                    addr2 = '0x' + addr2.toString(16);
+                    h5gg.setValue(addr2, 2410324, 'I32');
+                }
+                
+            }
+        }
+        
+        
+        
+        
+        
+        
+        function ljc()
+        {
+            h5gg.clearResults();
+            h5gg.searchNumber('1000','F32','0x1000000', '0x300000000');
+            h5gg.searchNearby('1', 'F32', '0x4');
+            h5gg.searchNearby('90~99','F32','0x60');
+            h5gg.searchNumber('90~99','F32','0x10000000', '0x300000000');
+            var count = h5gg.getResultsCount();
+            var r = h5gg.getResults(count);
+            for (var i = 0; i < count; i++) {
+                var addr1 = r[i].address;
+                var weishu = /0$/;
+                var pd = weishu.test(addr1);
+                if (pd) {
+                    var addr2 = Number(addr1) + +68;
+                    addr2 = '0x' + addr2.toString(16);
+                    h5gg.setValue(addr2, 300,'F32');
+                }
+                if (pd) {
+                    var addr2 = Number(addr1) + -20;
+                    addr2 = '0x' + addr2.toString(16);
+                    h5gg.setValue(addr2, 1.2,'F32');
+                }
+            }
+        }
+        
+        
+        function hc()
+        {
+            h5gg.clearResults();
+            h5gg.searchNumber('1000','F32','0x1000000', '0x300000000');
+            h5gg.searchNearby('1', 'F32', '0x4');
+            h5gg.searchNearby('100.1~115','F32','0x60');
+            h5gg.searchNumber('100.1~115','F32','0x10000000', '0x300000000');
+            var count = h5gg.getResultsCount();
+            var r = h5gg.getResults(count);
+            for (var i = 0; i < count; i++) {
+                var addr1 = r[i].address;
+                var weishu = /0$/;
+                var pd = weishu.test(addr1);
+                if (pd) {
+                    var addr2 = Number(addr1) + +68;
+                    addr2 = '0x' + addr2.toString(16);
+                    h5gg.setValue(addr2, 300,'F32');
+                }
+                if (pd) {
+                    var addr2 = Number(addr1) + -20;
+                    addr2 = '0x' + addr2.toString(16);
+                    h5gg.setValue(addr2, 1.2,'F32');
+                }
+            }
+        }
+        
+        
+        
+        function zdjq()
+        {
+            
+            h5gg.clearResults();
+            h5gg.searchNumber('45','F32','0x10000000', '0x300000000');
+            h5gg.searchNearby('4.4', 'F32', '0x50');
+            h5gg.searchNearby('256', 'I32', '0x6C');
+            h5gg.searchNumber('256','I32','0x10000000', '0x300000000');
+            alert('修改' + h5gg.getResultsCount() + '条');
+            var count = h5gg.getResultsCount();
+            var r = h5gg.getResults(count);
+            for (var i = 0; i < count; i++) {
+                var addr1 = r[i].address;
+                var weishu = /0$/;
+                var pd = weishu.test(addr1);
+                if (pd) {
+                    var addr2 = Number(addr1) + -8;
+                    addr2 = '0x' + addr2.toString(16);
+                    h5gg.setValue(addr2, 500, 'I32');
+                }
+                
+            }
+        }
+        
+        
+        
+        
+        function wxxp()
+        {
+            h5gg.clearResults();
+            h5gg.searchNumber('1.4','F32','0x10000000', '0x300000000');
+            h5gg.searchNearby('35', 'F32', '0x14');
+            h5gg.searchNearby('256', 'I32', '0x3C');
+            h5gg.searchNumber('35','F32','0x10000000', '0x300000000');
+            
+            alert('修改' + h5gg.getResultsCount() + '条');
+            var count = h5gg.getResultsCount();
+            var r = h5gg.getResults(count);
+            for (var i = 0; i < count; i++) {
+                var addr1 = r[i].address;
+                var weishu = /C$/;
+                var pd = weishu.test(addr1);
+                if (pd) {
+                    var addr2 = Number(addr1) + -20;
+                    addr2 = '0x' + addr2.toString(16);
+                    h5gg.setValue(addr2, 999, 'F32');
+                }
+                
+            }
+        }
+        function wjs() {
+            h5gg.clearResults();
+            h5gg.searchNumber('1', 'F32', '0x10000000', '0x300000000');
+            h5gg.searchNearby('1000', 'F32', '0x14');
+            h5gg.searchNumber('1', 'F32', '0x10000000', '0x300000000');
+
+            alert('修改' + h5gg.getResultsCount() + '条');
+            var count = h5gg.getResultsCount();
+            var r = h5gg.getResults(count);
+            for (var i = 0; i < count; i++) {
+                var addr1 = r[i].address;
+                var weishu = /C$/;
+                var pd = weishu.test(addr1);
+                if (pd) {
+                    h5gg.setValue(addr1, 1.13, 'F32');
+                }
+            }
+        }
+        
+        function cq()
+        {
+            h5gg.clearResults();
+            h5gg.searchNumber('0.6','F32','0x10000000', '0x300000000');
+            h5gg.searchNearby('-0.1', 'F32', '0x4');
+            h5gg.searchNearby('0.3', 'F32', '0x3C');
+            h5gg.searchNumber('0.6','F32','0x10000000', '0x300000000');
+            
+            alert('修改' + h5gg.getResultsCount() + '条');
+            var count = h5gg.getResultsCount();
+            var r = h5gg.getResults(count);
+            for (var i = 0; i < count; i++) {
+                var addr1 = r[i].address;
+                var weishu = /C$/;
+                var pd = weishu.test(addr1);
+                if (pd) {
+                    var addr2 = Number(addr1) + +12;
+                    addr2 = '0x' + addr2.toString(16);
+                    h5gg.setValue(addr2, -999, 'F32');
+                }
+                
+            }
+        }
+        
+        
+        function pyts()
+        {
+            h5gg.clearResults();
+            h5gg.searchNumber('0.6','F32','0x10000000', '0x300000000');
+            h5gg.searchNearby('-0.1', 'F32', '0x4');
+            h5gg.searchNearby('0.3', 'F32', '0x3C');
+            h5gg.searchNumber('0.6','F32','0x10000000', '0x300000000');
+            
+            alert('修改' + h5gg.getResultsCount() + '条');
+            var count = h5gg.getResultsCount();
+            var r = h5gg.getResults(count);
+            for (var i = 0; i < count; i++) {
+                var addr1 = r[i].address;
+                var weishu = /C$/;
+                var pd = weishu.test(addr1);
+                if (pd) {
+                    var addr2 = Number(addr1) + -328;
+                    addr2 = '0x' + addr2.toString(16);
+                    h5gg.setValue(addr2, 10086, 'F32');
+                }
+                
+            }
+        }
+        
+        
+        function cxln()
+        {
+            h5gg.clearResults();
+            h5gg.searchNumber('89','I32','0x12000000', '0x300000000');
+            h5gg.searchNearby('298', 'I32', '0x4');
+            h5gg.searchNearby('81', 'I32', '0x500');
+            h5gg.searchNumber('81','I32','0x12000000', '0x300000000');
+            
+            alert('修改' + h5gg.getResultsCount() + '条');
+            var count = h5gg.getResultsCount();
+            var r = h5gg.getResults(count);
+            for (var i = 0; i < count; i++) {
+                var addr1 = r[i].address;
+                var weishu = /0$/;
+                var pd = weishu.test(addr1);
+                if (pd) {
+                    var addr2 = Number(addr1) + +4;
+                    addr2 = '0x' + addr2.toString(16);
+                    h5gg.setValue(addr2, 3400, 'I32');
+                }
+                
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /*function zz()
+         
+         
+         {
+         
+         var X = h5gg.getRangesList('speedmobile');
+         var te;
+         te = Number (X[0].start) + 0xdfec938;
+         te = Number (h5gg.getValue(te,'F32')) + 0xdd8;0x780;0x38
+         
+         h5gg.setValue(te,1.255,'F32');
+         
+         
+         }
+         */
+        
+        
+    </script>
 </html>

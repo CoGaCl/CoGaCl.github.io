@@ -1,762 +1,394 @@
-<!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>脚本大咖</title>
+<script>
+setButtonImage('https://q.qlogo.cn/g?b=qq&nk=387982594&s=100');
+</script>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    color: #000;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+body {
+    background: transparent;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+*:not(input, checkbox, textarea) {
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+}
+
+.popup_container {
+    position: absolute;
+    z-index: 1000;
+    left: 50%;
+    top: 0;
+}
+
+#H5AlertView {
+    width: 220px;
+    height: 300px;
+    position: absolute;
+    left: -110px;
+    top: 100px;
+    text-align: center;
+    zoom: 0.8;
+}
+
+#title-text {
+    padding-top: 0px;
+    font-size: 23px;
+  font-weight:600;
+    color: #494949;
+}
+
+#info-text {
+    padding: 10px;
+    color: #494949;
+}
+
+#content-view {
+    z-index: 0;
+    background: #fff;
+    position: relative;
+    top: 0px;
+    border: 1px solid #E8E8E8;
+    border-radius: 16px;
+    padding: 10px;
+}
+
+button {
+    width: 100%;
+    height: 40px;
+    color: #fff;
+    background-color: #3a6df0;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    border-radius: 7px;
+    padding: 0 8px;
+    margin: 5px 0;
+    font-size: 17px;
+}
+
+button:active {
+    background-color: #007E40;
+    transform: translateY(2px);
+}
+</style>
+</head>
+
+<body>
     
-    <head>
-        <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>卡密验证系统</title>
-                    <style>
-                        /* * {
-                         margin: 0;
-                         padding: 0;
-                         font-family: 'Microsoft YaHei', Arial, sans-serif;
-                         } */
-                        
-                        .baiyunyz {
-                            position: fixed;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
-                            border-radius: 15px;
-                            padding: 20px;
-                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-                            max-width: 80%;
-                            width: 350px;
-                            text-align: center;
-                            background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
-                            border: 2px solid yellow;  /* 2px宽，实线，黄色边框 */
+<!--悬浮菜单-->
+<div class="popup_container">
+<div id="H5AlertView">
+<script>
+function draw(fps) {
+    window.draw_state = 1;
+    alert("想要提示的文本内容")
+}
 
-                            
-                            
-                            
-                        }
-                        
-                        .baiyunyz h1 {
-                            font-size: 24px;
-                            color: #333;
-                            margin-bottom: 10px;
-                        }
-                        
-                        .baiyunyz h2 {
-                            color: #666;
-                            margin-bottom: 20px;
-                            font-size: 16px;
-                        }
-                        
-                        .baiyunyz input {
-                            border: 1px solid #ccc;
-                            background-color: #f9f9f9;
-                            width: 90%;
-                            border-radius: 5px;
-                            padding: 10px 15px;
-                            margin-bottom: 10px;
-                            font-size: 16px;
-                            color: #333;
-                        }
-                        
-                        .baiyunyz button {
-                            /*登录按钮背景颜色*/
-                            background-color: rgba(255, 255, 255, 0.5); /* 白色半透明背景 */
-                            border: 0;
-                            padding: 12px 18px;
-                            border-radius: 8px;
-                            width: 50%;
-                            cursor: pointer;
-                            font-size: 18px;
-                            font-weight: 700;
-                            transition: background-color 0.3s ease;
-                            color: yellow; /* 文字颜色改为黄色 */
-                            padding-top: 8px;
+function unDraw() {
+    clearCtx();
+    window.draw_state = 0;
+    setTimeout(function(){
+},100);
+}
+  
+  
+function hideMenu() {
+    var menu = document.querySelector("#H5AlertView");
+    menu.style.display = 'none';
 
-                            
-                            
-                        }
-                        
-                        .baiyunyz button:hover {
-                            background-color: #3bbf4c;
-                        }
-                    </style>
-    </head>
-    <div class="baiyunyz">
-<!--        <h1>猫咪</h1>-->
-<h1 style="color: yellow;">猫咪</h1>
-<!--        <h2 id="gg">公告</h2>-->
-        <form class="form" id="entry_form">
-            <input type="text" placeholder="输入卡号" id="card">
-                <button type="button" id="entry_btn">登录</button>
-                <div id="prompt" class="prompt"></div>
-        </form>
-    </div>
+    setWindowTouch(false);
+}
+
+</script>
+<div id="content-view">
+<div id="title-text">Ios</div>
+<div id="text">选择功能</div>
+<button onclick="shan()">小白衣改木乃伊</button>
+<button onclick="neiwuhou()">小白衣改炽羽金尊</button>
+<button onclick="baise()">Ak改五级炫紫旋律</button>
+<button onclick="heise()">SCR改黄金龙骨</button>
+<button onclick="lvse()">  M4改五爪金龙</button>
+<button onclick="toushi1()">平底锅改x战警</button>
+<button onclick="toushi2()">A12-A13人物透视</button>
+<button onclick="toushi3()">A14人物透视透视</button>
+<button onclick="toushi4()">A15人物透视透视</button>
+<button onclick="meihua5()">小白衣改红螳螂</button>
+<button onclick="meihua6()">小白衣改紫螳螂</button>
+<button onclick="meihua7()">小白衣改黄螳螂</button>
+<button onclick="meihua8()">小白衣改木乃伊</button>
+<button onclick="meihua9()">小白衣改格斗专家</button>
+
+
+
+<button onclick="hideMenu()">关闭菜单</button>
+</div>
+</div>
+</div>
+</div>
+</body>
+<script>
+
+document.body.addEventListener('touchstart', function () {});
     
-    <script src="https://smoba-1309934553.cos.ap-guangzhou.myqcloud.com/jquery-3.6.0.min.js"></script>
-    <script>
-        // 修复获取公告和登录按钮问题
-        $(function () {
-            
-            $("#entry_btn").on("click", function () {
-                performLogin();
-            });
-            
-            function getAnnouncement() {
-                $("#gg").text(BSPHP.gg());
-            }
-            
-            function performLogin() {
-                alert(BSPHP.login($("#card").val()));
-            }
-            
-            $(document).keydown(function (event) {
-                if (event.keyCode === 13) {
-                    performLogin();
-                }
-            });
-            
-            var savedCard = localStorage.getItem("card");
-            if (savedCard) {
-                $("#card").val(savedCard);
-            }
-            
-            getAnnouncement();
-        });
-    </script>
+setWindowDrag(0, 0, 0, 0);
+
+var iosScale = window.devicePixelRatio;
+var sWidth = 0; 
+var sHeight = 0; 
+
+var canvasDom = document.createElement("canvas");
+document.body.appendChild(canvasDom);
+canvasDom.style.height = "100%";
+canvasDom.style.width = "100%";
+
+var layout = function()
+{
+
+    if(window.lastorientation==window.orientation) return;
+    window.lastorientation=window.orientation;
     
-    <script>
-        const G_BSPHP_URL = "https://vip.diyiart.cn/AppEn.php?appid=56565&m=4edb92f23f99626f3b40cde227671e15";
-        const G_BSPHP_KEY = "54363f4018b7b7e84ae9f927a3759941";
-        const Base64 = {
-            encode: (str) => {
-                return window.btoa(unescape(encodeURIComponent(str)));
-            },
-            decode: (str) => {
-                return decodeURIComponent(escape(window.atob(str)));
-            }
-        }
-        
-        
-        function bin2hex(s) {
-            var i, l, o = '',
-            n;
-            s += '';
-            
-            for (i = 0, l = s.length; i < l; i++) {
-                n = s.charCodeAt(i)
-                .toString(16);
-                o += n.length < 2 ? '0' + n : n;
-            }
-            return o;
-        }
-        
-        function getUUID() {
-            var udid = localStorage.getItem("udid");
-            if (udid) {
-                return udid;
-            } else {
-                var randomUUID = Math.floor(Math.random() * 1000000000000000);
-                localStorage.setItem("udid", randomUUID);
-                return randomUUID;
-            }
-        }
-        
-        
-        function GetGlobalParameter() {
-            var gArray = {
-                "BSphpSeSsL": getUUID(),
-                "date": Date.parse(new Date()) / 1000,
-                "md5": "",
-                "mutualkey": G_BSPHP_KEY //通信密钥Key
-            };
-            return gArray;
-        }
-        
-        function obj2Url(param, key, encode) {
-            if (param == null) return '';
-            var paramStr = '';
-            var t = typeof (param);
-            if (t == 'string' || t == 'number' || t == 'boolean') {
-                paramStr += '&' + key + '=' + ((encode == null || encode) ? encodeURIComponent(param) : param);
-            } else {
-                for (var i in param) {
-                    var k = key == null ? i : key + (param instanceof Array ? '[' + i + ']' : '.' + i);
-                    paramStr += obj2Url(param[i], k, encode);
-                }
-            }
-            return paramStr;
-        }
-        
-        function bsphpPost(param) {
-            param = obj2Url(param);
-            param = "parameter=" + Base64.encode(param);
-            var jqdata = $.ajax({
-                url: G_BSPHP_URL,
-                type: "POST",
-                data: param,
-                async: false
-            });
-            if (jqdata.status === 200) {
-                return Base64.decode(jqdata.responseText);
-            }
-            return jqdata.statusText;
-        }
-        
-        function bsphplogin(param) {
-            param = obj2Url(param);
-            param = "parameter=" + Base64.encode(param);
-            var jqdata = $.ajax({
-                url: G_BSPHP_URL,
-                type: "POST",
-                data: param,
-                async: false
-            });
-            if (jqdata.status === 200) {
-                var responseText = Base64.decode(jqdata.responseText);
-                var dataArray = responseText.split("|");
-                if (dataArray[1] === "1081") {
-                    // 进行下一步操作
-                    var responseText = `到期日期: ${dataArray[4]}`;
-                    localStorage.setItem("card", $("#card").val());
-                    document.querySelector(".baiyunyz").style.display = "none";
-                    document.querySelector(".popup_container").style.display = "block";
-                    
-                }
-                return responseText;
-            }
-            return jqdata.statusText;
-        }
-        
-        
-        //全局UUID，直接使用
-        const UUID = getUUID();
-        
-        const BSPHP = {
-            //软件版本信息，查看https://www.bsphp.com/chm-13.html
-            v: () => {
-                var p = GetGlobalParameter();
-                p.api = "v.in";
-                return bsphpPost(p);
-            },
-            //公告，查看https://www.bsphp.com/chm-14.html
-            gg: () => {
-                var p = GetGlobalParameter();
-                p.api = "gg.in";
-                return bsphpPost(p);
-            },
-            //登录，查看https://www.bsphp.com/chm-45.html
-            login: (card) => {
-                var p = GetGlobalParameter();
-                p.api = "login.ic";
-                p.icid = card;
-                p.key = UUID;
-                p.maxoror = UUID;
-                return bsphplogin(p);
-            },
-            //获取登录状态，查看https://www.bsphp.com/chm-54.html
-            getlkinfo: () => {
-                var p = GetGlobalParameter();
-                p.api = "getlkinfo.ic";
-                return bsphpPost(p);
-            },
-            //获取用户信息,查看https://www.bsphp.com/chm-50.html
-            getinfo: (info) => {
-                var p = GetGlobalParameter();
-                p.api = "getinfo.ic";
-                p.info = info;
-                return bsphpPost(p);
-            },
-        }
-    </script>
-    <head>
-        <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>ayDraw</title>
-                <script>
-                    setButtonImage('https://q.qlogo.cn/g?b=qq&nk=2412716971&s=100');
-                </script>
-                <style>
-                    * {
-                        margin: 0;
-                        padding: 0;
-                        color: #000;
-                        font-size: 12px;
-                        font-family: Arial, sans-serif;
-                        -webkit-tap-highlight-color: transparent;
-                        outline: none;
-                    }
-                    
-                    body {
-                        background: transparent;
-                        position: fixed;
-                        left: 0;
-                        top: 0;
-                        width: 100%;
-                        height: 100%;
-                    }
-                    
-                    
-                    *:not(input, checkbox, textarea) {
-                        
-                        -webkit-touch-callout: none;
-                        -webkit-user-select: none;
-                        user-select: none;
-                        
-                    }
-                    
-                    .popup_container {
-                        display: none;/* 验证后启动 */
-                        position: absolute;
-                        z-index: 1000;
-                        left: 50%;
-                        top: 40%;
-                    }
-                    
-                    #H5AlertView {
-                        width: 620px;
-                        height: 200px;
-                        position: absolute;
-                        left: -310px;
-                        top: 0px; //居上
-                        text-align: center;
-                        zoom: 0.8;
-                    }
-                    #time-display {
-                        width: 100%;
-                        text-align: center;
-                        padding-top: 0px;
-                        font-size: 15px;/* 控制字体打戏哦啊 */
-                        font-weight:600;/* 控制字体粗细 */
-                        color: yellow; /* 将标题和信息文本颜色更改为黄色 */
-                    }
+    if(Math.abs(window.orientation)==90) {
+        setWindowRect(0,0,window.screen.height,window.screen.width);
+        canvasDom.width = window.screen.height * iosScale;
+        canvasDom.height = window.screen.width * iosScale;
+        sWidth = window.screen.height;
+        sHeight = window.screen.width;
+    } else {
+        setWindowRect(0,0,window.screen.width,window.screen.height);
+        canvasDom.height = window.screen.height * iosScale;
+        canvasDom.width = window.screen.width * iosScale;
+        sWidth = window.screen.width;
+        sHeight = window.screen.height;
+    }
+}
 
-                    #title-text {
-                        width: 100%;
-                        text-align: center;
-                        padding-top: 0px;
-                        font-size: 23px;
-                        font-weight:600;
-                        color: yellow; /* 将标题和信息文本颜色更改为黄色 */
-                    }
-                    
-                    #info-text {
-                        padding: 10px;
-                        color: #FF0000;
-                    }
-                    
-                    #content-view {
-                        flex-wrap: wrap;
-                        justify-content: space-around; /* 这将在按钮之间添加一些空间 */
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        z-index: 0;
-                        background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
-                        position: relative;
-                        top: 0px;
-                        border: 2px solid yellow;  /* 2px宽，实线，黄色边框 */
-                        border-radius: 16px;
-                        padding: 10px;
-                    }
-                    
-                    button {
-                        width: 30%; /* 设置宽度以适应每行三个按钮 */
-                        height: 40px; /* 或您想要的任何高度 */
-                        color: yellow; /* 文字颜色改为黄色 */
-                        background-color: rgba(255, 255, 255, 0.5); /* 白色半透明背景 */
-                        border: none; /* 移除边框 */
-                        border-radius: 5px; /* 或者您想要的任何边框半径 */
-                        font-size: 12px; /* 或者您想要的任何字体大小 */
-                        margin: 5px; /* 添加一些边距 */
-                    }
-                    
-                    button:active {
-                        background-color: #005f5f; /* 更改按下按钮时的背景颜色 */
-                        transform: translateY(2px);
-                    }
-                    
-                </style>
-    </head>
+layout();
+window.addEventListener("orientationchange", layout, false);
+
+setButtonAction(function(){
+        
+     var menu = document.querySelector("#H5AlertView");
+     if(menu.style.display=='none') {
+         menu.style.display='block';
+         setWindowTouch(true);
+     } else {
+         menu.style.display='none';
+         setWindowTouch(false);
+     }
+});
     
-    <body>
-        <!--悬浮菜单-->
-        <div class="popup_container">
-            <div id="H5AlertView">
-                <script>
-                    function draw(fps) {
-                        window.draw_state = 1;
-                    }
-                    
-                    function unDraw() {
-                        clearCtx();
-                        window.draw_state = 0;
-                        setTimeout(function(){
-                        },100);
-                    }
-                    
-                    
-                    function hideMenu() {
-                        var menu = document.querySelector("#H5AlertView");
-                        menu.style.display = 'none';
-                        
-                        setWindowTouch(false);
-                    }
-                    
-                </script>
-                <div id="content-view">
-                    <div id="title-text">猫咪</div>
-                    <div id="buttons-container">
-                        <button onclick="cx()">超限孙悟空</button>
-                        <button onclick="ljc()">漂移弹射(垃圾车)</button>
-                        <button onclick="hc()">漂移弹射(好车)</button>
-                        <button onclick="zdjq()">自动集气</button>
-                        <button onclick="wxxp()">无限小喷</button>
-                        <button onclick="wxxp()">无限小喷</button>
-                        <button onclick="cq()">穿墙</button>
-                        <button onclick="cxln()">超限雷诺</button>
-                    </div>
-                    <div id="time-display"></div>
-                </div>
-                
-            </div>
-        </div>
-        <script>
-                function updateBeijingTime() {
-                    const now = new Date();
-                    const options = { timeZone: 'Asia/Shanghai', year: 'numeric',month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-                    const formattedTime = new Intl.DateTimeFormat('zh-CN', options).format(now);
-                    document.getElementById('time-display').innerText = '北京时间: ' + formattedTime;
-                }
+function shan() {
+alert("正在美化中");
+h5gg.clearResults(); //清空搜索结果
+    h5gg.searchNumber('403251', 'I32', '0x100000000', '0x1600000000');
+    h5gg.editAll('403598', 'I32');
+    h5gg.clearResults(); //清空搜索结果
+            alert("木乃伊");
+    }
 
-                // 初始化时间显示
-                updateBeijingTime();
+       function neiwuhou() {
+       alert('美化中');
+   
+              h5gg.clearResults(); //清空搜索结果
+               h5gg.searchNumber('403251', 'I32', '0x100000000', '0x1600000000');
+               h5gg.editAll('403888', 'I32');
+               h5gg.clearResults(); //清空搜索结果
+                       alert("炽羽金尊美化成功");
+               }
+   
+function yan() {
+           h5gg.clearResults();
 
-                // 每秒更新时间
-                setInterval(updateBeijingTime, 1000);
+           h5gg.searchNumber('0.05499718338', 'F32', '0x100000000', '0x160000000');
 
-                function draw(fps) {
-                    window.draw_state = 1;
-                }
-                
-                function unDraw() {
-                    clearCtx();
-                    window.draw_state = 0;
-                    setTimeout(function(){
-                    },100);
-                }
-                
-                
-                function hideMenu() {
-                    var menu = document.querySelector("#H5AlertView");
-                    menu.style.display = 'none';
-                    
-                    setWindowTouch(false);
-                }
-            </script>
-    </body>
-    <script>
-        
-        document.body.addEventListener('touchstart', function () {});
-        
-        setWindowDrag(0, 0, 0, 0);
-        
-        var iosScale = window.devicePixelRatio;
-        var sWidth = 0;
-        var sHeight = 0;
-        
-        var canvasDom = document.createElement("canvas");
-        document.body.appendChild(canvasDom);
-        canvasDom.style.height = "100%";
-        canvasDom.style.width = "100%";
-        
-        var layout = function()
-        {
-            
-            if(window.lastorientation==window.orientation) return;
-            window.lastorientation=window.orientation;
-            
-            if(Math.abs(window.orientation)==90) {
-                setWindowRect(0,0,window.screen.height,window.screen.width);
-                canvasDom.width = window.screen.height * iosScale;
-                canvasDom.height = window.screen.width * iosScale;
-                sWidth = window.screen.height;
-                sHeight = window.screen.width;
-            } else {
-                setWindowRect(0,0,window.screen.width,window.screen.height);
-                canvasDom.height = window.screen.height * iosScale;
-                canvasDom.width = window.screen.width * iosScale;
-                sWidth = window.screen.width;
-                sHeight = window.screen.height;
-            }
-        }
-        
-        layout();
-        window.addEventListener("orientationchange", layout, false);
-        
-        setButtonAction(function(){
-            
-            var menu = document.querySelector("#H5AlertView");
-            if(menu.style.display=='none') {
-                menu.style.display='block';
-                setWindowTouch(true);
-            } else {
-                menu.style.display='none';
-                setWindowTouch(false);
-            }
-        });
-        
-        
-        
-        
-        
-        function cx()
-        {
-            
-            h5gg.clearResults();
-            h5gg.searchNumber('101','I32','0x10000000', '0x300000000');
-            h5gg.searchNearby('306', 'I32', '0x4');
-            h5gg.searchNearby('97', 'I32', '0x80');
-            h5gg.searchNumber('97','I32','0x10000000', '0x300000000');
-            alert('修改' + h5gg.getResultsCount() + '条');
-            var count = h5gg.getResultsCount();
-            var r = h5gg.getResults(count);
-            for (var i = 0; i < count; i++) {
-                var addr1 = r[i].address;
-                var weishu = /0$/;
-                var pd = weishu.test(addr1);
-                if (pd) {
-                    var addr2 = Number(addr1) + +4;
-                    addr2 = '0x' + addr2.toString(16);
-                    h5gg.setValue(addr2, 2410324, 'I32');
-                }
-                
-            }
-        }
-        
-        
-        
-        
-        
-        
-        function ljc()
-        {
-            h5gg.clearResults();
-            h5gg.searchNumber('1000','F32','0x1000000', '0x300000000');
-            h5gg.searchNearby('1', 'F32', '0x4');
-            h5gg.searchNearby('90~99','F32','0x60');
-            h5gg.searchNumber('90~99','F32','0x10000000', '0x300000000');
-            var count = h5gg.getResultsCount();
-            var r = h5gg.getResults(count);
-            for (var i = 0; i < count; i++) {
-                var addr1 = r[i].address;
-                var weishu = /0$/;
-                var pd = weishu.test(addr1);
-                if (pd) {
-                    var addr2 = Number(addr1) + +68;
-                    addr2 = '0x' + addr2.toString(16);
-                    h5gg.setValue(addr2, 300,'F32');
-                }
-                if (pd) {
-                    var addr2 = Number(addr1) + -20;
-                    addr2 = '0x' + addr2.toString(16);
-                    h5gg.setValue(addr2, 1.2,'F32');
-                }
-            }
-        }
-        
-        
-        function hc()
-        {
-            h5gg.clearResults();
-            h5gg.searchNumber('1000','F32','0x1000000', '0x300000000');
-            h5gg.searchNearby('1', 'F32', '0x4');
-            h5gg.searchNearby('100.1~115','F32','0x60');
-            h5gg.searchNumber('100.1~115','F32','0x10000000', '0x300000000');
-            var count = h5gg.getResultsCount();
-            var r = h5gg.getResults(count);
-            for (var i = 0; i < count; i++) {
-                var addr1 = r[i].address;
-                var weishu = /0$/;
-                var pd = weishu.test(addr1);
-                if (pd) {
-                    var addr2 = Number(addr1) + +68;
-                    addr2 = '0x' + addr2.toString(16);
-                    h5gg.setValue(addr2, 300,'F32');
-                }
-                if (pd) {
-                    var addr2 = Number(addr1) + -20;
-                    addr2 = '0x' + addr2.toString(16);
-                    h5gg.setValue(addr2, 1.2,'F32');
-                }
-            }
-        }
-        
-        
-        
-        function zdjq()
-        {
-            
-            h5gg.clearResults();
-            h5gg.searchNumber('45','F32','0x10000000', '0x300000000');
-            h5gg.searchNearby('4.4', 'F32', '0x50');
-            h5gg.searchNearby('256', 'I32', '0x6C');
-            h5gg.searchNumber('256','I32','0x10000000', '0x300000000');
-            alert('修改' + h5gg.getResultsCount() + '条');
-            var count = h5gg.getResultsCount();
-            var r = h5gg.getResults(count);
-            for (var i = 0; i < count; i++) {
-                var addr1 = r[i].address;
-                var weishu = /0$/;
-                var pd = weishu.test(addr1);
-                if (pd) {
-                    var addr2 = Number(addr1) + -8;
-                    addr2 = '0x' + addr2.toString(16);
-                    h5gg.setValue(addr2, 500, 'I32');
-                }
-                
-            }
-        }
-        
-        
-        
-        
-        function wxxp()
-        {
-            h5gg.clearResults();
-            h5gg.searchNumber('1.4','F32','0x10000000', '0x300000000');
-            h5gg.searchNearby('35', 'F32', '0x14');
-            h5gg.searchNearby('256', 'I32', '0x3C');
-            h5gg.searchNumber('35','F32','0x10000000', '0x300000000');
-            
-            alert('修改' + h5gg.getResultsCount() + '条');
-            var count = h5gg.getResultsCount();
-            var r = h5gg.getResults(count);
-            for (var i = 0; i < count; i++) {
-                var addr1 = r[i].address;
-                var weishu = /C$/;
-                var pd = weishu.test(addr1);
-                if (pd) {
-                    var addr2 = Number(addr1) + -20;
-                    addr2 = '0x' + addr2.toString(16);
-                    h5gg.setValue(addr2, 999, 'F32');
-                }
-                
-            }
-        }
-        function wjs() {
-            h5gg.clearResults();
-            h5gg.searchNumber('1', 'F32', '0x10000000', '0x300000000');
-            h5gg.searchNearby('1000', 'F32', '0x14');
-            h5gg.searchNumber('1', 'F32', '0x10000000', '0x300000000');
 
-            alert('修改' + h5gg.getResultsCount() + '条');
-            var count = h5gg.getResultsCount();
-            var r = h5gg.getResults(count);
-            for (var i = 0; i < count; i++) {
-                var addr1 = r[i].address;
-                var weishu = /C$/;
-                var pd = weishu.test(addr1);
-                if (pd) {
-                    h5gg.setValue(addr1, 1.13, 'F32');
-                }
-            }
+h5gg.searchNearby('1', 'F32', '0x20');
+           h5gg.clearResults();
+
+           h5gg.searchNumber('0.05499718338', 'F32', '0x100000000', '0x160000000');
+
+vant.Notify({ type: 'success', message: '搜索到' + h5gg.getResultsCount() + '条数据' });
+}
+
+       
+function baise() {
+    alert('美化中');
+       h5gg.clearResults(); //清空搜索结果
+        h5gg.searchNumber('10100100', 'I32', '0x100000000', '0x1600000000');
+        h5gg.editAll('101001032', 'I32');
+        h5gg.clearResults(); //清空搜索结果
+                alert("五级炫紫旋律美化成功");
         }
-        
-        function cq()
-        {
-            h5gg.clearResults();
-            h5gg.searchNumber('0.6','F32','0x10000000', '0x300000000');
-            h5gg.searchNearby('-0.1', 'F32', '0x4');
-            h5gg.searchNearby('0.3', 'F32', '0x3C');
-            h5gg.searchNumber('0.6','F32','0x10000000', '0x300000000');
-            
-            alert('修改' + h5gg.getResultsCount() + '条');
-            var count = h5gg.getResultsCount();
-            var r = h5gg.getResults(count);
-            for (var i = 0; i < count; i++) {
-                var addr1 = r[i].address;
-                var weishu = /C$/;
-                var pd = weishu.test(addr1);
-                if (pd) {
-                    var addr2 = Number(addr1) + +12;
-                    addr2 = '0x' + addr2.toString(16);
-                    h5gg.setValue(addr2, -999, 'F32');
-                }
-                
-            }
+function heise() {
+alert('美化中');
+   h5gg.clearResults(); //清空搜索结果
+    h5gg.searchNumber('10100300', 'I32', '0x100000000', '0x1600000000');
+    h5gg.editAll('10100308', 'I32');
+    h5gg.clearResults(); //清空搜索结果
+            alert("黄金龙骨美化成功");
+    }
+           
+    function lvse() {
+    alert('美化中');
+       h5gg.clearResults(); //清空搜索结果
+        h5gg.searchNumber('10100400', 'I32', '0x100000000', '0x1600000000');
+        h5gg.editAll('101004025', 'I32');
+        h5gg.clearResults(); //清空搜索结果
+                alert("五爪金龙美化成功");
         }
-        
-        
-        function pyts()
-        {
-            h5gg.clearResults();
-            h5gg.searchNumber('0.6','F32','0x10000000', '0x300000000');
-            h5gg.searchNearby('-0.1', 'F32', '0x4');
-            h5gg.searchNearby('0.3', 'F32', '0x3C');
-            h5gg.searchNumber('0.6','F32','0x10000000', '0x300000000');
-            
-            alert('修改' + h5gg.getResultsCount() + '条');
-            var count = h5gg.getResultsCount();
-            var r = h5gg.getResults(count);
-            for (var i = 0; i < count; i++) {
-                var addr1 = r[i].address;
-                var weishu = /C$/;
-                var pd = weishu.test(addr1);
-                if (pd) {
-                    var addr2 = Number(addr1) + -328;
-                    addr2 = '0x' + addr2.toString(16);
-                    h5gg.setValue(addr2, 10086, 'F32');
-                }
-                
-            }
-        }
-        
-        
-        function cxln()
-        {
-            h5gg.clearResults();
-            h5gg.searchNumber('89','I32','0x12000000', '0x300000000');
-            h5gg.searchNearby('298', 'I32', '0x4');
-            h5gg.searchNearby('81', 'I32', '0x500');
-            h5gg.searchNumber('81','I32','0x12000000', '0x300000000');
-            
-            alert('修改' + h5gg.getResultsCount() + '条');
-            var count = h5gg.getResultsCount();
-            var r = h5gg.getResults(count);
-            for (var i = 0; i < count; i++) {
-                var addr1 = r[i].address;
-                var weishu = /0$/;
-                var pd = weishu.test(addr1);
-                if (pd) {
-                    var addr2 = Number(addr1) + +4;
-                    addr2 = '0x' + addr2.toString(16);
-                    h5gg.setValue(addr2, 3400, 'I32');
-                }
-                
-            }
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        /*function zz()
-         
-         
-         {
-         
-         var X = h5gg.getRangesList('speedmobile');
-         var te;
-         te = Number (X[0].start) + 0xdfec938;
-         te = Number (h5gg.getValue(te,'F32')) + 0xdd8;0x780;0x38
-         
-         h5gg.setValue(te,1.255,'F32');
-         
-         
-         }
-         */
-        
-        
-    </script>
+    
+function toushi1() {
+ alert('美化中');
+    h5gg.clearResults(); //清空搜索结果
+     h5gg.searchNumber('10800400', 'I32', '0x100000000', '0x1600000000');
+     h5gg.editAll('108004022', 'I32');
+     h5gg.clearResults(); //清空搜索结果
+             alert("x战警美化成功");
+     }
+    
+
+
+function toushi2() {
+  alert('透视开启中'); 
+
+h5gg.clearResults();
+
+h5gg.searchNumber('-2874700953465257726', 'I64', '0x0', '0x160000000');
+
+alert('透视' + h5gg.getResultsCount() + '条');
+
+h5gg.editAll('-2874700953465256352', 'I64');
+
+h5gg.clearResults();
+
+h5gg.searchNumber('-2874841708125093630', 'I64', '0x0', '0x160000000');
+
+alert('完善' + h5gg.getResultsCount() + '条');
+
+h5gg.editAll('4260548951490035970', 'I64');
+
+      alert("透视开启成功");  
+}
+
+
+
+function toushi3() {
+  alert('A14透视开启中'); 
+
+h5gg.clearResults();
+
+h5gg.searchNumber('-2874700953465257726', 'I64', '0x0', '0x160000000');
+
+alert('透视' + h5gg.getResultsCount() + '条');
+
+h5gg.editAll('-2874700953465256352', 'I64');
+
+h5gg.clearResults();
+
+h5gg.searchNumber('-2874841708125093630', 'I64', '0x0', '0x160000000');
+
+alert('完善' + h5gg.getResultsCount() + '条');
+
+h5gg.editAll('4260548951490035970', 'I64');
+
+      alert("透视开启成功");  
+}
+
+
+
+function toushi4() {
+   alert('A15透视开启中'); 
+
+h5gg.clearResults();
+
+h5gg.searchNumber('3787063554', 'I32', '0x0', '0x160000000');
+
+h5gg.searchNearby('3625583280', 'I32', '0x20');
+
+h5gg.searchNumber('3787063554', 'I32',
+
+'0x100000000', '0x1600000000');
+
+alert('透视' + h5gg.getResultsCount() + '条');
+
+h5gg.editAll('3787064906', 'I32');
+
+      alert("透视开启成功"); 
+}
+
+
+function meihua5()
+{
+    h5gg.clearResults(); //清空搜索结果
+    h5gg.searchNumber('403251', 'I32', '0x100000000', '0x1600000000');
+    h5gg.editAll('413062', 'I32');
+    h5gg.clearResults(); //清空搜索结果
+            alert("红螳螂");
+    }
+
+
+function meihua6()
+{
+    h5gg.clearResults(); //清空搜索结果
+    h5gg.searchNumber('403251', 'I32', '0x100000000', '0x1600000000');
+    h5gg.editAll('413063', 'I32');
+    h5gg.clearResults(); //清空搜索结果
+            alert("紫螳螂");
+    }
+
+
+function meihua7()
+{
+    h5gg.clearResults(); //清空搜索结果
+    h5gg.searchNumber('403251', 'I32', '0x100000000', '0x1600000000');
+    h5gg.editAll('413064', 'I32');
+    h5gg.clearResults(); //清空搜索结果
+            alert("黄螳螂");
+    }
+
+function meihua8()
+{
+    h5gg.clearResults(); //清空搜索结果
+    h5gg.searchNumber('403251', 'I32', '0x100000000', '0x1600000000');
+    h5gg.editAll('403598', 'I32');
+    h5gg.clearResults(); //清空搜索结果
+            alert("木乃伊");
+    }
+    
+    function meihua9()
+{
+    h5gg.clearResults(); //清空搜索结果
+    h5gg.searchNumber('403251', 'I32', '0x100000000', '0x1600000000');
+    h5gg.editAll('401287', 'I32');
+    h5gg.clearResults(); //清空搜索结果
+            alert("格斗专家美化成功");
+    }
+
+
+</script>
 </html>

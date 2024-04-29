@@ -1,394 +1,135 @@
-<html>
+<!DOCTYPE html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>脚本大咖</title>
-<script>
-setButtonImage('https://q.qlogo.cn/g?b=qq&nk=387982594&s=100');
-</script>
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    color: #000;
-    font-size: 12px;
-    font-family: Arial, sans-serif;
-    -webkit-tap-highlight-color: transparent;
-    outline: none;
-}
-
-body {
-    background: transparent;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-}
-
-
-*:not(input, checkbox, textarea) {
-
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
-
-}
-
-.popup_container {
-    position: absolute;
-    z-index: 1000;
-    left: 50%;
-    top: 0;
-}
-
-#H5AlertView {
-    width: 220px;
-    height: 300px;
-    position: absolute;
-    left: -110px;
-    top: 100px;
-    text-align: center;
-    zoom: 0.8;
-}
-
-#title-text {
-    padding-top: 0px;
-    font-size: 23px;
-  font-weight:600;
-    color: #494949;
-}
-
-#info-text {
-    padding: 10px;
-    color: #494949;
-}
-
-#content-view {
-    z-index: 0;
-    background: #fff;
-    position: relative;
-    top: 0px;
-    border: 1px solid #E8E8E8;
-    border-radius: 16px;
-    padding: 10px;
-}
-
-button {
-    width: 100%;
-    height: 40px;
-    color: #fff;
-    background-color: #3a6df0;
-    display: inline-block;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    border: none;
-    border-radius: 7px;
-    padding: 0 8px;
-    margin: 5px 0;
-    font-size: 17px;
-}
-
-button:active {
-    background-color: #007E40;
-    transform: translateY(2px);
-}
-</style>
-</head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>RSGP</title>
 <body>
-    
-<!--悬浮菜单-->
-<div class="popup_container">
-<div id="H5AlertView">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" id="td-theme-css" href="https://pandora-1305080901.cos.ap-guangzhou.myqcloud.com/%E7%89%B9%E6%95%88/%E4%BD%A0%E6%98%AF%E5%81%B7%E4%BD%A0%E5%A6%88%E5%91%A2%EF%BC%9F%E5%BA%9F%E7%89%A9%E7%8E%A9%E6%84%8F%E4%BD%A0%E5%A6%88%E5%87%BA%E9%97%A8%E5%BF%85%E5%A4%87%E6%B3%A5%E5%A4%B4%E8%BD%A6%E7%A2%BE%E6%AD%BB%E7%88%86%E6%B5%86%E4%BA%BA%E8%A1%8C%E9%80%9A%E9%81%93.css" type="text/css" media="all">
+<link rel="stylesheet" id="td-theme-demo-style-css" href="https://pandora-1305080901.cos.ap-guangzhou.myqcloud.com/%E7%89%B9%E6%95%88/%E4%BD%A0%E6%98%AF%E5%81%B7%E4%BD%A0%E5%A6%88%E5%91%A2%EF%BC%9F%E5%BA%9F%E7%89%A9%E7%8E%A9%E6%84%8F%E5%92%8C%E4%BD%A0%E5%A9%8A%E5%AD%90%E5%A6%88%E9%80%9A%E5%A5%B8%E4%B8%8D%E5%AD%95%E4%B8%8D%E8%82%B2%E5%AD%90%E5%AD%99%E6%BB%A1%E5%A0%82.css" type="text/css" media="all">
+
+<body oncontextmenu = " return false">
 <script>
-function draw(fps) {
-    window.draw_state = 1;
-    alert("想要提示的文本内容")
+  document.onselectstart = function(){
+  event.returnValue = false;
 }
+//或者直接返回整个事件
 
-function unDraw() {
-    clearCtx();
-    window.draw_state = 0;
-    setTimeout(function(){
-},100);
+document.onselectstart = function(){
+    return  false;
 }
-  
-  
-function hideMenu() {
-    var menu = document.querySelector("#H5AlertView");
-    menu.style.display = 'none';
-
-    setWindowTouch(false);
-}
-
 </script>
-<div id="content-view">
-<div id="title-text">Ios</div>
-<div id="text">选择功能</div>
-<button onclick="shan()">小白衣改木乃伊</button>
-<button onclick="neiwuhou()">小白衣改炽羽金尊</button>
-<button onclick="baise()">Ak改五级炫紫旋律</button>
-<button onclick="heise()">SCR改黄金龙骨</button>
-<button onclick="lvse()">  M4改五爪金龙</button>
-<button onclick="toushi1()">平底锅改x战警</button>
-<button onclick="toushi2()">A12-A13人物透视</button>
-<button onclick="toushi3()">A14人物透视透视</button>
-<button onclick="toushi4()">A15人物透视透视</button>
-<button onclick="meihua5()">小白衣改红螳螂</button>
-<button onclick="meihua6()">小白衣改紫螳螂</button>
-<button onclick="meihua7()">小白衣改黄螳螂</button>
-<button onclick="meihua8()">小白衣改木乃伊</button>
-<button onclick="meihua9()">小白衣改格斗专家</button>
-
-
-
-<button onclick="hideMenu()">关闭菜单</button>
-</div>
-</div>
-</div>
-</div>
 </body>
+<body oncontextmenu = " return false">
 <script>
-
-document.body.addEventListener('touchstart', function () {});
-    
-setWindowDrag(0, 0, 0, 0);
-
-var iosScale = window.devicePixelRatio;
-var sWidth = 0; 
-var sHeight = 0; 
-
-var canvasDom = document.createElement("canvas");
-document.body.appendChild(canvasDom);
-canvasDom.style.height = "100%";
-canvasDom.style.width = "100%";
-
-var layout = function()
-{
-
-    if(window.lastorientation==window.orientation) return;
-    window.lastorientation=window.orientation;
-    
-    if(Math.abs(window.orientation)==90) {
-        setWindowRect(0,0,window.screen.height,window.screen.width);
-        canvasDom.width = window.screen.height * iosScale;
-        canvasDom.height = window.screen.width * iosScale;
-        sWidth = window.screen.height;
-        sHeight = window.screen.width;
-    } else {
-        setWindowRect(0,0,window.screen.width,window.screen.height);
-        canvasDom.height = window.screen.height * iosScale;
-        canvasDom.width = window.screen.width * iosScale;
-        sWidth = window.screen.width;
-        sHeight = window.screen.height;
-    }
+  document.oncontextmenu = function(){
+    event.returnValue = false;
 }
+//或者直接返回整个事件
 
-layout();
-window.addEventListener("orientationchange", layout, false);
-
-setButtonAction(function(){
-        
-     var menu = document.querySelector("#H5AlertView");
-     if(menu.style.display=='none') {
-         menu.style.display='block';
-         setWindowTouch(true);
-     } else {
-         menu.style.display='none';
-         setWindowTouch(false);
-     }
-});
-    
-function shan() {
-alert("正在美化中");
-h5gg.clearResults(); //清空搜索结果
-    h5gg.searchNumber('403251', 'I32', '0x100000000', '0x1600000000');
-    h5gg.editAll('403598', 'I32');
-    h5gg.clearResults(); //清空搜索结果
-            alert("木乃伊");
-    }
-
-       function neiwuhou() {
-       alert('美化中');
-   
-              h5gg.clearResults(); //清空搜索结果
-               h5gg.searchNumber('403251', 'I32', '0x100000000', '0x1600000000');
-               h5gg.editAll('403888', 'I32');
-               h5gg.clearResults(); //清空搜索结果
-                       alert("炽羽金尊美化成功");
-               }
-   
-function yan() {
-           h5gg.clearResults();
-
-           h5gg.searchNumber('0.05499718338', 'F32', '0x100000000', '0x160000000');
-
-
-h5gg.searchNearby('1', 'F32', '0x20');
-           h5gg.clearResults();
-
-           h5gg.searchNumber('0.05499718338', 'F32', '0x100000000', '0x160000000');
-
-vant.Notify({ type: 'success', message: '搜索到' + h5gg.getResultsCount() + '条数据' });
+document.oncontextmenu = function(){
+      return  false;
 }
-
-       
-function baise() {
-    alert('美化中');
-       h5gg.clearResults(); //清空搜索结果
-        h5gg.searchNumber('10100100', 'I32', '0x100000000', '0x1600000000');
-        h5gg.editAll('101001032', 'I32');
-        h5gg.clearResults(); //清空搜索结果
-                alert("五级炫紫旋律美化成功");
-        }
-function heise() {
-alert('美化中');
-   h5gg.clearResults(); //清空搜索结果
-    h5gg.searchNumber('10100300', 'I32', '0x100000000', '0x1600000000');
-    h5gg.editAll('10100308', 'I32');
-    h5gg.clearResults(); //清空搜索结果
-            alert("黄金龙骨美化成功");
-    }
-           
-    function lvse() {
-    alert('美化中');
-       h5gg.clearResults(); //清空搜索结果
-        h5gg.searchNumber('10100400', 'I32', '0x100000000', '0x1600000000');
-        h5gg.editAll('101004025', 'I32');
-        h5gg.clearResults(); //清空搜索结果
-                alert("五爪金龙美化成功");
-        }
-    
-function toushi1() {
- alert('美化中');
-    h5gg.clearResults(); //清空搜索结果
-     h5gg.searchNumber('10800400', 'I32', '0x100000000', '0x1600000000');
-     h5gg.editAll('108004022', 'I32');
-     h5gg.clearResults(); //清空搜索结果
-             alert("x战警美化成功");
-     }
-    
-
-
-function toushi2() {
-  alert('透视开启中'); 
-
-h5gg.clearResults();
-
-h5gg.searchNumber('-2874700953465257726', 'I64', '0x0', '0x160000000');
-
-alert('透视' + h5gg.getResultsCount() + '条');
-
-h5gg.editAll('-2874700953465256352', 'I64');
-
-h5gg.clearResults();
-
-h5gg.searchNumber('-2874841708125093630', 'I64', '0x0', '0x160000000');
-
-alert('完善' + h5gg.getResultsCount() + '条');
-
-h5gg.editAll('4260548951490035970', 'I64');
-
-      alert("透视开启成功");  
-}
-
-
-
-function toushi3() {
-  alert('A14透视开启中'); 
-
-h5gg.clearResults();
-
-h5gg.searchNumber('-2874700953465257726', 'I64', '0x0', '0x160000000');
-
-alert('透视' + h5gg.getResultsCount() + '条');
-
-h5gg.editAll('-2874700953465256352', 'I64');
-
-h5gg.clearResults();
-
-h5gg.searchNumber('-2874841708125093630', 'I64', '0x0', '0x160000000');
-
-alert('完善' + h5gg.getResultsCount() + '条');
-
-h5gg.editAll('4260548951490035970', 'I64');
-
-      alert("透视开启成功");  
-}
-
-
-
-function toushi4() {
-   alert('A15透视开启中'); 
-
-h5gg.clearResults();
-
-h5gg.searchNumber('3787063554', 'I32', '0x0', '0x160000000');
-
-h5gg.searchNearby('3625583280', 'I32', '0x20');
-
-h5gg.searchNumber('3787063554', 'I32',
-
-'0x100000000', '0x1600000000');
-
-alert('透视' + h5gg.getResultsCount() + '条');
-
-h5gg.editAll('3787064906', 'I32');
-
-      alert("透视开启成功"); 
-}
-
-
-function meihua5()
-{
-    h5gg.clearResults(); //清空搜索结果
-    h5gg.searchNumber('403251', 'I32', '0x100000000', '0x1600000000');
-    h5gg.editAll('413062', 'I32');
-    h5gg.clearResults(); //清空搜索结果
-            alert("红螳螂");
-    }
-
-
-function meihua6()
-{
-    h5gg.clearResults(); //清空搜索结果
-    h5gg.searchNumber('403251', 'I32', '0x100000000', '0x1600000000');
-    h5gg.editAll('413063', 'I32');
-    h5gg.clearResults(); //清空搜索结果
-            alert("紫螳螂");
-    }
-
-
-function meihua7()
-{
-    h5gg.clearResults(); //清空搜索结果
-    h5gg.searchNumber('403251', 'I32', '0x100000000', '0x1600000000');
-    h5gg.editAll('413064', 'I32');
-    h5gg.clearResults(); //清空搜索结果
-            alert("黄螳螂");
-    }
-
-function meihua8()
-{
-    h5gg.clearResults(); //清空搜索结果
-    h5gg.searchNumber('403251', 'I32', '0x100000000', '0x1600000000');
-    h5gg.editAll('403598', 'I32');
-    h5gg.clearResults(); //清空搜索结果
-            alert("木乃伊");
-    }
-    
-    function meihua9()
-{
-    h5gg.clearResults(); //清空搜索结果
-    h5gg.searchNumber('403251', 'I32', '0x100000000', '0x1600000000');
-    h5gg.editAll('401287', 'I32');
-    h5gg.clearResults(); //清空搜索结果
-            alert("格斗专家美化成功");
-    }
-
-
 </script>
-</html>
+</body>
+<body oncontextmenu = " return false">
+<script>
+  document.oncopy= function(){
+    event.returnValue = false;
+}
+//或者直接返回整个事件
+
+ 
+
+document.oncopy= function(){
+ 
+    return false;
+ 
+}
+</script>
+</body>
+<body oncontextmenu = " return false">
+<script>
+document.onkeydown = function(){
+if(window.event && window.event.keyCode == 123) {
+    event.keyCode = 0;
+    event.returnValue = false;
+}
+}
+ < / 剧本 >
+ < /机构&联络处;
+<style>
+['\x74\x64']-header-wrap['\x74\x64']-header-menu-wrap-full, ['\x74\x64']-header-menu-wrap['\x74\x64']-affix, ['\x74\x64']-header-style-3 ['\x74\x64']-header-main-menu, ['\x74\x64']-header-style-3 ['\x74\x64']-affix['\x74\x64']-header-main-menu, ['\x74\x64']-header-style-4 ['\x74\x64']-header-main-menu, ['\x74\x64']-header-style-4 ['\x74\x64']-affix['\x74\x64']-header-main-menu, ['\x74\x64']-header-style-8 ['\x74\x64']-header-menu-wrap['\x74\x64']-affix, ['\x74\x64']-header-style-8 ['\x74\x64']-header-top-menu-full {
+background-color:#000000
+}
+ul['\x73\x66']-menu>['\x74\x64']-menu-item>a, ['\x74\x64']-theme-wrap['\x74\x64']-header-menu-social {
+line-height:70px
+}
+@media(min-width:768px) {
+['\x74\x64']-header-style-4 ['\x74\x64']-main-menu-logo img, ['\x74\x64']-header-style-5 ['\x74\x64']-main-menu-logo img, ['\x74\x64']-header-style-6 ['\x74\x64']-main-menu-logo img, ['\x74\x64']-header-style-7 ['\x74\x64']-header-sp-logo img, ['\x74\x64']-header-style-12 ['\x74\x64']-main-menu-logo img {
+max-height:70px
+}
+}
+.number {
+	margin: 5px 0 0 0;
+	position: relative;
+	font: 900 20vmin 'Consolas';
+	text-shadow: 2px -1px 0 #3023ae, 4px -2px 0 #3023ae, 6px -3px 0 #3023ae, 8px -4px 0 #3023ae, 10px -5px 0 #3023ae, 12px -6px 0 #3023ae, 14px -7px 0 #3023ae, 16px -8px 0 #3023ae;
+}
+div {
+	text-align: center;
+15px;
+}
+ A { 纺织装饰 : 没有 }
+ </ 风格 >
+ </ 头 > < 身体 等级 = "家庭页面模板页-模板页-页面构建-覆盖页-模板页-页面构建-页面构建-ID-29901网页全球块模板-1黑色TD--全布局TD-J-负载" >
+ < 分 身份证 = "td-outer-wrap"  等级 = "td-theme-wrap" >
+ < 分 等级 = "纸头包纸头型5" >
+<div class="td-header-top-menu-full td-container-wrap ">
+  <div class="td-container td-header-row td-header-top-menu"> </div>
+</div>
+<div class="td-header-menu-wrap-full td-container-wrap " style="height: 70px;">
+<div class="td-header-menu-wrap td-header-menu-no-search" style="transform: translate3d(0px, 0px, 0px);">
+<div class="td-container td-header-row td-header-main-menu black-menu">
+<div id="td-header-menu" role="navigation">
+<div class="td-main-menu-logo td-logo-in-menu td-logo-sticky"> <a class="td-mobile-logo td-sticky-header"> <img class="td-retina-data" src="RSGP" alt=""> </a> <a class="td-header-logo td-sticky-header"> <img src="RSGP" alt=""> </a> </div>
+<br/>
+<br/>
+<br/>
+<div class="td-main-content-wrap td-container-wrap">
+<div class="td-container tdc-content-wrap ">
+<div class="td-crumb-container">
+  <div class="entry-crumbs"> </div>
+</div>
+<div class="td-pb-row">
+ < 分 等级 =   作用 =  >
+ < 分 等级 =  >
+ </ 风格 >
+ < 分 等级 =   风格 =   > Boubg </ 分 >
+ </ 头 >
+ < 身体 >
+ < 侯爵 行为 =   方向 =  >
+
+
+
+  <SCRIPT>
+   var d = new Date
+
+
+
+Date
+
+ < P 风格 =  > < b > 护君一路前行 待君凯旋归来！ </ b > </ P >
+
+   </ 分 >
+   </ 分 >
+ < P 风格 =  > < A 高参考值 =  > < 间隔 等级 =   风格 =  > 启动游戏 </ 间隔 > < 元素元素 >
+   </ A > </ P >
+  
+
+
+
+
+
+
+</body>
+ </ Htmt >
